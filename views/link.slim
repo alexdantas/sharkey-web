@@ -10,4 +10,11 @@ li.link
     | (
     = link.added_at.strftime '%H:%m %d-%m-%Y'
     | )
+  form.link-delete action="/link/#{link.id}" method="POST"
+    /
+      Most browsers don't recognize the DELETE
+      HTTP method, so this is a fake for Sinatra
+      to recognize it as DELETE anyway
+    input type="hidden" name="_method" value="DELETE"
+    input type="submit" value="&times;" title="Delete Link"
 

@@ -12,6 +12,6 @@ form action="/" method="POST"
 
 
 ul.links
-  - @links.each do |link|
-    == slim(:link, locals: { link: link })
+  - @links.each do |the_link|
+    == slim(:link, locals: { link: the_link })
 

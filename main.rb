@@ -39,6 +39,14 @@ begin
     # The `params` Hash contains everything sent
     # from the URL.
     Link.create(title: params[:title], added_at: DateTime.now)
+
+    redirect to '/'
+  end
+
+  # When the user wants to delete something
+  delete '/link/:id' do
+    Link.get(params[:id]).destroy
+
     redirect to '/'
   end
 end
