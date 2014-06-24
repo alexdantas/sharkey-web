@@ -1,3 +1,5 @@
+/
+  Layout for the main page
 
 h1 Hello, World!
 p
@@ -11,8 +13,5 @@ form action="/" method="POST"
 
 ul.links
   - @links.each do |link|
-    li.link
-      span.link-title = link.title
-      br
-      span.link-date  = link.added_at
+    == slim(:link, locals: { link: link })
 

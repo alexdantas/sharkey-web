@@ -1,0 +1,13 @@
+/
+  Layout for a single Link
+  It will get shown as a part of a greater
+  list
+
+li.link
+  span.link-title = link.title
+  '
+  span.link-added
+    | (
+    = link.added_at.strftime '%H:%m %d-%m-%Y'
+    | )
+
