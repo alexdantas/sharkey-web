@@ -3,3 +3,10 @@ h1 Hello, World!
 p
   | This is the first page
 
+ul.links
+  - @links.each do |link|
+    li.link
+      span.link-title = link.title
+      br
+      span.link-date  = link.added_at
+

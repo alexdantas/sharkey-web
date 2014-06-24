@@ -24,6 +24,11 @@ begin
   DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
 
   get '/' do
+
+    # Creating an instance variable
+    # (visible inside all Views)
+    @links = Link.all
+
     slim :index
   end
 end
