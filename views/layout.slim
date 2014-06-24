@@ -1,0 +1,15 @@
+/ Main SLIM layout file for Saruman, beibeh
+doctype html
+html
+  head
+    meta charset="utf-8"
+    title Hello, Sinatra!
+
+    link rel="stylesheet" media="screen, projection" href="/css/bootstrap.css"
+
+    /[if lt IE 9]
+      script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"
+
+  body
+    == yield
+
