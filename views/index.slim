@@ -50,7 +50,7 @@
       p No links to display right now...
 
     -else
-      ul.links
+      ul.links.list-group
         - @links.each do |the_link|
           == slim(:link, locals: { link: the_link })
 

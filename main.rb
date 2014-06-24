@@ -2,6 +2,10 @@ require 'sinatra'
 require 'slim'
 require 'data_mapper'
 
+# For making date/time user-friendly
+require 'date'
+require 'chronic_duration'
+
 # Represents a single HyperLink specified by the user.
 #
 class Link

@@ -3,19 +3,38 @@
   It will get shown as a part of a greater
   list
 
-li.link
-  span.link-title
+li.link.list-group-item
+
+  .link-title
     a href="#{link.url}" = link.title
-  '
-  span.link-added
-    | (
-    = link.added_at.strftime '%H:%m %d-%m-%Y'
-    | )
+
+  .link-added
+    ruby:
+      #
+      # Full date where the link was added
+      added_full = link.added_at.strftime '%H:%m %d-%m-%Y'
+      #
+      # Now we'll calculate a short, human-friendly
+      # version of the above (like '2 days, 5 hours')
+      added_secs = link.added_at.strftime('%s').to_i
+      now_secs   = DateTime.now.strftime('%s').to_i
+      #
+      added_short = ChronicDuration.output(now_secs-added_secs)
+    ' Added
+    a href="#" title="#{added_full}"
+      | #{added_short}
+    '
+    | ago
+
   form.link-delete action="/link/#{link.id}" method="POST"
-    /
-      Most browsers don't recognize the DELETE
-      HTTP method, so this is a fake for Sinatra
-      to recognize it as DELETE anyway
-    input type="hidden" name="_method" value="DELETE"
-    input type="submit" value="&times;" title="Delete Link"
+    .form-group
+      /
+        Most browsers don't recognize the DELETE
+        HTTP method, so this is a fake for Sinatra
+        to recognize it as DELETE anyway
+      input type="hidden" name="_method" value="DELETE"
+      button.btn.btn-xs.btn-default type="submit" title="Delete Link"
+        span.glyphicon.glyphicon-trash
+        '
+        | Destroy
 
