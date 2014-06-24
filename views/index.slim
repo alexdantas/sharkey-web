@@ -3,6 +3,12 @@ h1 Hello, World!
 p
   | This is the first page
 
+
+form action="/" method="POST"
+  input type="text" name="title"
+  input.button type="submit" value="New Link"
+
+
 ul.links
   - @links.each do |link|
     li.link

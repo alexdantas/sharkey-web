@@ -23,6 +23,7 @@ begin
   # Starting out the SQLite Database
   DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
 
+  # When the user requests root
   get '/' do
 
     # Creating an instance variable
@@ -30,6 +31,15 @@ begin
     @links = Link.all
 
     slim :index
+  end
+
+  # When the user sends something to root
+  post '/' do
+
+    # The `params` Hash contains everything sent
+    # from the URL.
+    Link.create(title: params[:title], added_at: DateTime.now)
+    redirect to '/'
   end
 end
 
