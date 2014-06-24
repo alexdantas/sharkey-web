@@ -12,6 +12,7 @@ class Link
 
   property :id,          Serial                    # Auto-incrementing key
   property :title,       String, :required => true # User-specified title
+  property :url,         String, :required => true # Actual URL
   property :added_at,    DateTime                  # When this link was added
 end
 
@@ -20,8 +21,15 @@ end
 DataMapper.finalize
 
 begin
+  # Full path to the database file
+  DATABASE_PATH = "#{Dir.pwd}/tmp/database.db"
+
   # Starting out the SQLite Database
-  DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
+  DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{DATABASE_PATH}")
+
+  # Creates Tables if they doesn't exist
+  # Tries to adapt new models to already-existing ones...
+  DataMapper.auto_upgrade!
 
   # When the user requests root
   get '/' do
@@ -38,7 +46,9 @@ begin
 
     # The `params` Hash contains everything sent
     # from the URL.
-    Link.create(title: params[:title], added_at: DateTime.now)
+    Link.create(title:    params[:title],
+                url:      params[:url],
+                added_at: DateTime.now)
 
     redirect to '/'
   end

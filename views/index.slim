@@ -27,11 +27,16 @@
 
 
     form action="/" method="POST"
-      input type="text" name="title"
+      input type="text" name="title" placeholder="Title"
+      input type="text" name="url"   placeholder="URL"
       input.button type="submit" value="New Link"
 
 
-    ul.links
-      - @links.each do |the_link|
-        == slim(:link, locals: { link: the_link })
+    - if @links.empty?
+      p No links to display right now...
+
+    -else
+      ul.links
+        - @links.each do |the_link|
+          == slim(:link, locals: { link: the_link })
 
