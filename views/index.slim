@@ -22,15 +22,27 @@
   .container
 
     h1 Hello, World!
-    p
-      | This is the first page
 
+    .input-link
+      p Links are never enough:
 
-    form action="/" method="POST"
-      input type="text" name="title" placeholder="Title"
-      input type="text" name="url"   placeholder="URL"
-      input.button type="submit" value="New Link"
+      form.form-horizontal role="form" action="/" method="POST"
+        .form-group
+          label.col-sm-2.control-label for="input-link-title"
+            | Title
+          .col-sm-10
+            input.form-control type="text" id="input-link-title" name="title" placeholder="Title"
 
+        .form-group
+          label.col-sm-2.control-label for="input-link-url"
+            | URL
+          .col-sm-10
+            input.form-control type="text" id="input-link-url"   name="url"   placeholder="URL"
+
+        .form-group
+          .col-sm-offset-2.col-sm-10
+            button.btn.btn-default type="submit"
+              | Summon new Link
 
     - if @links.empty?
       p No links to display right now...
