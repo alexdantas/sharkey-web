@@ -108,7 +108,7 @@ begin
     redirect to '/'
   end
 
-  # When the user wants to delete something
+  # When the user wants to delete a link
   delete '/link/:id' do
     the_link = Link.get(params[:id])
 
@@ -117,7 +117,19 @@ begin
     the_link.taggings.destroy
     the_link.destroy
 
-    redirect to '/'
+    redirect back
+  end
+
+  # When the user wants to delete a Tag
+  delete '/tag/:id' do
+    the_tag = Tag.get(params[:id])
+
+    # Before deleting the tag, we must remove
+    # all Tag associations
+    the_tag.taggings.destroy
+    the_tag.destroy
+
+    redirect back
   end
 
   # Go to the "Settings page"
@@ -132,7 +144,7 @@ begin
     Tagging.destroy
     Link.destroy
 
-    redirect to '/'
+    redirect back
   end
 
   # Go to the Link page of specific ID
