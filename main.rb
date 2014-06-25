@@ -22,7 +22,35 @@ class Link
   property :url,      String, :required => true # Actual URL
   property :title,    String                    # User-specified title
   property :added_at, DateTime                  # When this link was added
-  property :tags,     CommaSeparatedList        # Individual tags
+
+  has n, :taggings
+  has n, :tags, :through => :taggings
+end
+
+# Single textual tag Links can have
+#
+class Tag
+  include DataMapper::Resource
+
+  property :id,   Serial
+  property :name, String, :required => true
+
+  has n, :taggings
+  has n, :links, :through => :taggings
+end
+
+# The actual action of tagging Links.
+#
+# This is necessary because we can query both
+# of them:
+# - All Links of a Tag
+# - All Tags of a Link
+#
+class Tagging
+  include DataMapper::Resource
+
+  belongs_to :tag,  :key => true
+  belongs_to :link, :key => true
 end
 
 # This method must be called after ALL models
@@ -53,12 +81,25 @@ begin
   # When the user sends something to root
   post '/' do
 
+    # All tags that will be associated to this Link
+    tags = []
+
+    params[:tags].split(',').each do |tag|
+
+      # Skipping if got a "string,like,,this,with,,,missing,colons,,,"
+      next if tag.nil?
+
+      # If Tag exists, return it.
+      # Otherwise, create it
+      tags << Tag.first_or_create(name: tag)
+    end
+
     # The `params` Hash contains everything sent
     # from the URL.
     Link.create(title:    params[:title],
                 url:      params[:url],
                 added_at: DateTime.now,
-                tags:     params[:tags])
+                tags:     tags)
 
     redirect to '/'
   end
@@ -80,6 +121,22 @@ begin
     Link.destroy
 
     redirect to '/'
+  end
+
+  # Go to the Link page of specific ID
+  get '/link/:id' do
+    the_link = Link.get(params[:id])
+    redirect to '/' if not the_link
+
+    slim(:link, locals: { link: the_link })
+  end
+
+  # Go to the Tag page of specific ID
+  get '/tag/:id' do
+    the_tag = Tag.get(params[:id])
+    redirect to '/' if not the_tag
+
+    slim(:tag, locals: { tag: the_tag })
   end
 end
 

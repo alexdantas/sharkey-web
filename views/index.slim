@@ -43,5 +43,5 @@
     -else
       ul.links.list-group
         - @links.each do |the_link|
-          == slim(:link, locals: { link: the_link })
+          == slim(:single_link, locals: { link: the_link })
 

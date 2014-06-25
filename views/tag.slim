@@ -1,0 +1,23 @@
+/
+  Layout for a page of a single Tag
+
+== slim(:navbar, locals: { page: "tag" })
+
+.col-md.12
+  .container
+
+    h1 Tag: #{tag.name}
+
+    - if tag.links.empty?
+      p No Links with this Tag
+
+    - else
+      ul.list-group
+        - tag.links.each do |link|
+          li.list-group-item
+            a href="/link/#{link.id}"
+              ' (Internal Link)
+
+            a href="#{link.url}"
+              | #{if link.title then link.title else link.url end}
+

@@ -1,0 +1,50 @@
+/
+  Layout for a single Link
+  It will get shown as a part of a greater
+  list
+  Local variable: link
+
+li.link.list-group-item
+
+  .link-title
+    - if link.title.empty?
+      a href="#{link.url}" = link.url
+    - else
+      a href="#{link.url}" = link.title
+
+  .link-added
+    ruby:
+      #
+      # Full date where the link was added
+      added_full = link.added_at.strftime '%H:%m %d-%m-%Y'
+      #
+      # Now we'll calculate a short, human-friendly
+      # version of the above (like '2 days, 5 hours')
+      added_secs = link.added_at.strftime('%s').to_i
+      now_secs   = DateTime.now.strftime('%s').to_i
+      #
+      added_short = ChronicDuration.output(now_secs-added_secs)
+    ' Added
+    a href="#" title="#{added_full}"
+      | #{added_short}
+    '
+    | ago
+
+  .link-tags
+    - if link.tags
+      - link.tags.each do |tag|
+        a.link-tag href="/tag/#{tag.id}" title="#{tag.name}"
+          span.badge = tag.name
+
+  form.link-delete action="/link/#{link.id}" method="POST"
+    .form-group
+      /
+        Most browsers don't recognize the DELETE
+        HTTP method, so this is a fake for Sinatra
+        to recognize it as DELETE anyway
+      input type="hidden" name="_method" value="DELETE"
+      button.btn.btn-xs.btn-default type="submit" title="Delete Link"
+        span.glyphicon.glyphicon-trash
+        '
+        | Destroy
+

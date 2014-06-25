@@ -12,10 +12,10 @@ body {
 	font-style: italic;
 }
 
-.link-tags a {
+.link-tag {
 	margin-left: 5px;
 }
-.link-tags a span:hover {
+.link-tag span:hover {
 	background-color: blue;
 }
 
