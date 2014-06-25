@@ -147,8 +147,18 @@ begin
   delete '/all-links' do
     Tagging.destroy
     Link.destroy
-
-    redirect back
+    redirect to '/'
+  end
+  delete '/all-tags' do
+    Tagging.destroy
+    Tag.destroy
+    redirect to '/'
+  end
+  delete '/everything' do
+    Tagging.destroy
+    Link.destroy
+    Tag.destroy
+    redirect to '/'
   end
 
   # Go to the Link page of specific ID
