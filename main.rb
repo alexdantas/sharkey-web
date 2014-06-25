@@ -22,6 +22,7 @@ class Link
   property :url,      String, :required => true # Actual URL
   property :title,    String                    # User-specified title
   property :added_at, DateTime                  # When this link was added
+  property :tags,     CommaSeparatedList        # Individual tags
 end
 
 # This method must be called after ALL models
@@ -56,7 +57,8 @@ begin
     # from the URL.
     Link.create(title:    params[:title],
                 url:      params[:url],
-                added_at: DateTime.now)
+                added_at: DateTime.now,
+                tags:     params[:tags])
 
     redirect to '/'
   end

@@ -30,6 +30,12 @@ li.link.list-group-item
     '
     | ago
 
+  .link-tags
+    - if link.tags
+      - link.tags.each do |tag|
+        a href="#" title="#{tag}"
+          span.badge = tag
+
   form.link-delete action="/link/#{link.id}" method="POST"
     .form-group
       /
