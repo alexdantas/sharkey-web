@@ -126,4 +126,27 @@
       .modal-footer
         p lel
 
+/ Settings about the 'Add Link' modal
+javascript:
+  // Prevent user from double-submitting a <form>
+  // 1. Make buttons hide when user submits
+  //    (either by clicking on 'Add Link' or pressing Enter)
+  // 2. As soon as a <form> starts being submitted,
+  //    disable further submissions.
+  var submitting = false;
+  $('.input-link form').submit(function() {
+    // By returning false we prevent further submissions
+    if (submitting)
+      return false;
+
+    // <input> validation!
+    // Only submit if we have an URL on the <form>
+    if ($('#input-link-url').val() !== "") {
+
+      $('.input-link form button').addClass('disabled');
+      submitting = true;
+    }
+    // Makes the form start submitting
+    return true;
+  });
 

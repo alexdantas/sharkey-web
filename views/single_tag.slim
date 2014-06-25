@@ -1,0 +1,37 @@
+/
+  Layout for a single Tag
+  It will get shown as a part of a greater
+  list
+  Local variable: tag
+
+li.tag.list-group-item
+
+  .tag-title
+    a href="/tag/#{tag.id}" = tag.name
+
+  .tag-links
+    - if tag.links.empty?
+      p No Links with this Tag
+
+    - else
+      ul.list-group
+        - tag.links.each do |link|
+          li.list-group-item
+            a href="/link/#{link.id}"
+              ' (Internal Link)
+
+            a href="#{link.url}"
+              | #{if link.title then link.title else link.url end}
+
+  form.tag-delete action="/tag/#{tag.id}" method="POST"
+    .form-group
+      /
+        Most browsers don't recognize the DELETE
+        HTTP method, so this is a fake for Sinatra
+        to recognize it as DELETE anyway
+      input type="hidden" name="_method" value="DELETE"
+      button.btn.btn-xs.btn-default type="submit" title="Delete Tag"
+        span.glyphicon.glyphicon-trash
+        '
+        | Destroy
+

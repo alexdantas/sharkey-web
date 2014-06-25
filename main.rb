@@ -96,11 +96,6 @@ begin
 
   # When the user requests root
   get '/' do
-
-    # Creating an instance variable
-    # (visible inside all Views)
-    @links = Link.all
-
     slim(:dashboard_index,
          :layout => :dashboard,
          :locals => { page: "home" })
@@ -200,12 +195,24 @@ begin
 
   # Show list of all Links
   get '/links' do
+    # Creating an instance variable
+    # (visible inside all Views)
+    @links = Link.all
 
+    slim(:links,
+         :layout => :dashboard,
+         :locals => { page: "links" })
   end
 
   # Show list of all Tags
   get '/tags' do
+    # Creating an instance variable
+    # (visible inside all Views)
+    @tags = Tag.all
 
+    slim(:tags,
+         :layout => :dashboard,
+         :locals => { page: "tags" })
   end
 
 end

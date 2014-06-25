@@ -1,0 +1,19 @@
+/ Lists all links
+
+h1.page-header Links
+
+p Page with everything about your links
+
+h2.sub-header All Links
+
+p Here's a list of all links.
+
+ul.links.list-group
+- if @links.empty?
+  li.list-group-item
+    | You have no links!
+
+- else
+  - @links.each do |the_link|
+    == slim(:single_link, locals: { link: the_link })
+

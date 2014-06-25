@@ -1,0 +1,19 @@
+/ Lists all tags
+
+h1.page-header Tags
+
+p Page with everything about your tags
+
+h2.sub-header All Tags
+
+p Here's a list of all tags.
+
+ul.tags.list-group
+- if @tags.empty?
+  li.list-group-item
+    | You have no tags!
+
+- else
+  - @tags.each do |the_tag|
+    == slim(:single_tag, locals: { tag: the_tag })
+
