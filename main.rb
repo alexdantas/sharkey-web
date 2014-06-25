@@ -101,7 +101,9 @@ begin
     # (visible inside all Views)
     @links = Link.all
 
-    slim :index
+    slim(:dashboard_index,
+         :layout => :dashboard,
+         :locals => { page: "home" })
   end
 
   # When the user sends something to root
@@ -125,7 +127,9 @@ begin
 
   # Go to the "Settings page"
   get '/settings' do
-    slim :settings
+    slim(:settings_index,
+         :layout => :settings,
+         :locals => { page: "settings" })
   end
 
   # Caution!
@@ -193,5 +197,16 @@ begin
 
     redirect to '/'
   end
+
+  # Show list of all Links
+  get '/links' do
+
+  end
+
+  # Show list of all Tags
+  get '/tags' do
+
+  end
+
 end
 

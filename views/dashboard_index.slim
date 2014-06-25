@@ -1,0 +1,55 @@
+/
+  Layout for the main page
+
+h1.page-header Dashboard
+
+p Welcome to Saruman Link!
+
+p You have...
+
+ul
+  - if Link.all.size == 0
+    li no links;
+  - else
+    li #{Link.all.size} links;
+
+  - if Tag.all.size == 0
+    li no tags;
+  - else
+    li #{Tag.all.size} tags;
+
+h2.sub-header Awesome!
+
+p Sweet, beibeh!
+
+- if @links.empty?
+  p No links to display right now...
+
+- else
+  ul.links.list-group
+    - @links.each do |the_link|
+      == slim(:single_link, locals: { link: the_link })
+
+javascript:
+  // Prevent user from double-submitting a <form>
+  // 1. Make buttons hide when user submits
+  //    (either by clicking on 'Add Link' or pressing Enter)
+  // 2. As soon as a <form> starts being submitted,
+  //    disable further submissions.
+  var submitting = false;
+  $('.input-link form').submit(function() {
+    // By returning false we prevent further submissions
+    if (submitting)
+      return false;
+
+    // <input> validation!
+    // Only submit if we have an URL on the <form>
+    if ($('#input-link-url').val() !== "") {
+
+      $('.input-link form button').addClass('disabled');
+      submitting = true;
+    }
+    // Makes the form start submitting
+    return true;
+  });
+
