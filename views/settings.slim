@@ -10,6 +10,18 @@
 
     ul.list-group
       li.list-group-item
+        p Import Links
+
+        form role="form" action="/import" method="POST" enctype="multipart/form-data"
+          input type="file" name="file"
+
+          button.btn.btn-xs.btn-default type="submit" title="Import"
+            span.glyphicon.glyphicon-trash
+            '
+            | Import
+
+
+      li.list-group-item
         p Erase all links
 
         form role="form" action="/all-links" method="POST"

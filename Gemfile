@@ -5,6 +5,7 @@ gem 'slim'
 gem 'data_mapper'
 gem 'dm-types'
 gem 'chronic_duration'
+gem 'nokogiri'
 
 group :development do
   gem 'shotgun'

@@ -6,6 +6,9 @@ require 'data_mapper'
 require 'date'
 require 'chronic_duration'
 
+# To import Links and get page's Titles
+require 'nokogiri'
+
 # By default Strings have at max 50 chars of length
 # That's hideous! Come on!
 DataMapper::Property::String.length 255
@@ -57,6 +60,29 @@ end
 # have been created and BEFORE the app starts
 DataMapper.finalize
 
+def create_link params
+
+  # All tags that will be associated to this Link
+  tags = []
+
+  params[:tags].split(',').each do |tag|
+
+    # Skipping if got a "string,like,,this,with,,,missing,colons,,,"
+    next if tag.nil?
+
+    # If Tag exists, return it.
+    # Otherwise, create it
+    tags << Tag.first_or_create(name: tag)
+  end
+
+  # The `params` Hash contains everything sent
+  # from the URL.
+  Link.create(title:    params[:title],
+              url:      params[:url],
+              added_at: DateTime.now,
+              tags:     tags)
+end
+
 begin
   # Full path to the database file
   DATABASE_PATH = "#{Dir.pwd}/tmp/database.db"
@@ -80,26 +106,7 @@ begin
 
   # When the user sends something to root
   post '/' do
-
-    # All tags that will be associated to this Link
-    tags = []
-
-    params[:tags].split(',').each do |tag|
-
-      # Skipping if got a "string,like,,this,with,,,missing,colons,,,"
-      next if tag.nil?
-
-      # If Tag exists, return it.
-      # Otherwise, create it
-      tags << Tag.first_or_create(name: tag)
-    end
-
-    # The `params` Hash contains everything sent
-    # from the URL.
-    Link.create(title:    params[:title],
-                url:      params[:url],
-                added_at: DateTime.now,
-                tags:     tags)
+    create_link params
 
     redirect to '/'
   end
@@ -143,6 +150,32 @@ begin
     redirect to '/' if not the_tag
 
     slim(:tag, locals: { tag: the_tag })
+  end
+
+  # Import Links from Bookmark HTML files
+  # (eg. Firefox, Delicious, etc)
+  post '/import' do
+    unless (params[:file] and params[:file][:tempfile])
+      redirect to '/'
+    end
+
+    file = File.open(params['file'][:tempfile])
+    html = Nokogiri::HTML(file)
+    file.close
+
+    html.css('a').each do |link|
+      params = {}
+
+      params[:url]   = link.attributes['href'].value
+      params[:title] = link.text
+      params[:tags]  = link.attributes['tags'].value
+
+      # Support ADDED_AT
+      # params[:added_at] = Time.at(link.attributes['add_date'].value.to_i)
+
+      create_link params
+    end
+    redirect to '/'
   end
 end
 
