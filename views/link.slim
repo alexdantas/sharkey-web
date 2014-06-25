@@ -6,7 +6,10 @@
 li.link.list-group-item
 
   .link-title
-    a href="#{link.url}" = link.title
+    - if link.title.empty?
+      a href="#{link.url}" = link.url
+    - else
+      a href="#{link.url}" = link.title
 
   .link-added
     ruby:

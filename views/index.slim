@@ -28,16 +28,16 @@
 
       form.form-horizontal role="form" action="/" method="POST"
         .form-group
-          label.col-sm-2.control-label for="input-link-title"
-            | Title
-          .col-sm-10
-            input.form-control type="text" id="input-link-title" name="title" placeholder="Title" required="true" autofocus="true"
-
-        .form-group
           label.col-sm-2.control-label for="input-link-url"
             | URL
           .col-sm-10
-            input.form-control type="text" id="input-link-url"   name="url"   placeholder="URL"   required="true"
+            input.form-control type="text" id="input-link-url"   name="url"   placeholder="URL"   required="true" autofocus="true"
+
+        .form-group
+          label.col-sm-2.control-label for="input-link-title"
+            | Title
+          .col-sm-10
+            input.form-control type="text" id="input-link-title" name="title" placeholder="Title"
 
         .form-group
           .col-sm-offset-2.col-sm-10

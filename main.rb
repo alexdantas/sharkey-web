@@ -6,6 +6,10 @@ require 'data_mapper'
 require 'date'
 require 'chronic_duration'
 
+# By default Strings have at max 50 chars of length
+# That's hideous! Come on!
+DataMapper::Property::String.length 255
+
 # Represents a single HyperLink specified by the user.
 #
 class Link
@@ -14,10 +18,10 @@ class Link
   # Below are all the database elements
   include DataMapper::Resource
 
-  property :id,          Serial                    # Auto-incrementing key
-  property :title,       String, :required => true # User-specified title
-  property :url,         String, :required => true # Actual URL
-  property :added_at,    DateTime                  # When this link was added
+  property :id,       Serial                    # Auto-incremented key
+  property :url,      String, :required => true # Actual URL
+  property :title,    String                    # User-specified title
+  property :added_at, DateTime                  # When this link was added
 end
 
 # This method must be called after ALL models
