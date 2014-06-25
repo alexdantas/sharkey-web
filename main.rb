@@ -106,7 +106,12 @@ begin
 
   # When the user wants to delete something
   delete '/link/:id' do
-    Link.get(params[:id]).destroy
+    the_link = Link.get(params[:id])
+
+    # Before deleting the link, we must remove
+    # all Tag associations
+    the_link.taggings.destroy
+    the_link.destroy
 
     redirect to '/'
   end
@@ -118,6 +123,7 @@ begin
 
   # Caution!
   delete '/all-links' do
+    Tagging.destroy
     Link.destroy
 
     redirect to '/'
