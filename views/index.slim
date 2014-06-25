@@ -3,18 +3,49 @@
 
 == slim(:navbar, locals: { page: "home" })
 
-.col-md.12
-  .container
+.container-fluid
+  .row
+    .col-sm-3.col-md-2.sidebar
+      ul.nav.nav-sidebar
+        li.active
+          a href="#" Overview
 
-    h1 Hello, World!
+      ul.nav.nav-sidebar
+        li
+          a href="#" Links
+        li
+          a href="#" Tags
 
-    - if @links.empty?
-      p No links to display right now...
+    .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
 
-    -else
-      ul.links.list-group
-        - @links.each do |the_link|
-          == slim(:single_link, locals: { link: the_link })
+      h1.page-header Dashboard
+
+      p Welcome to Saruman Link!
+
+      p You have...
+
+      ul
+        - if Link.all.size == 0
+          li no links;
+        - else
+          li #{Link.all.size} links;
+
+        - if Tag.all.size == 0
+          li no tags;
+        - else
+          li #{Tag.all.size} tags;
+
+      h2.sub-header Awesome!
+
+      p Sweet, beibeh!
+
+      - if @links.empty?
+        p No links to display right now...
+
+      -else
+        ul.links.list-group
+          - @links.each do |the_link|
+            == slim(:single_link, locals: { link: the_link })
 
 javascript:
   // Prevent user from double-submitting a <form>

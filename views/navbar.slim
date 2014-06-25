@@ -2,31 +2,55 @@
   Top navigation bar
 
 .navbar.navbar-inverse.navbar-fixed-top role="navigation"
-  .container
+  .container-fluid
     .navbar-header
       button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-collapse"
         span.sr-only Toggle navigation
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand href="/" Saruman Link
+      a.navbar-brand href="#" Saruman Link
 
     .collapse.navbar-collapse
-      ul.nav.navbar-nav
+      ul.nav.navbar-nav.navbar-left
         li
           a href="#" data-toggle="modal" data-target="#input-link"
+            span.glyphicon.glyphicon-plus-sign
+            '
             | Add Link
 
+      form.navbar-form.navbar-left
+        input.form-control type="text" placeholder="Search..."
+
+      ul.nav.navbar-nav.navbar-right
+
         li class="#{ if page == 'home'     then 'active' end }"
-          a href="/" Home
+          a href="/"
+            span.glyphicon.glyphicon-link
+            '
+            | Dashboard
 
         li class="#{ if page == 'settings' then 'active' end }"
-          a href="/settings" Settings
+          a href="/settings"
+            span.glyphicon.glyphicon-cog
+            '
+            |Settings
 
+        li
+          a href="/help"
+            span.glyphicon.glyphicon-question-sign
+            '
+            | Help
+        li
+          a href="/about"
+            span.glyphicon.glyphicon-info-sign
+            '
+            | About
 
 /
-  This thing will only get shown when requested
-  by a button
+  The 'Add Button' dialog
+  It will only get shown when requested by a button
+
 .modal.fade#input-link tabindex="-1" role="dialog" aria-labelledby="input-link-label" aria-hidden="true"
   .modal-dialog
     .modal-content
