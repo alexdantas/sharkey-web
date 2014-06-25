@@ -36,34 +36,68 @@
         h4.modal-title#input-link-label
           | Summon New Link
 
+        p.random-sentence
+          | ...Because links are never enough
+
       .modal-body
-        p Links are never enough
+        ul.nav.nav-pills
+          li.active
+            a href="#single-link" data-toggle="tab" Single Link
+          li
+            a href="#multiple-links" data-toggle="tab" Multiple Links
 
-        form.form-horizontal role="form" action="/" method="POST"
-          .form-group
-            label.col-sm-2.control-label for="input-link-url"
-              | URL
-            .col-sm-10
-              input.form-control type="text" id="input-link-url"   name="url"   placeholder="URL"   required="true" autofocus="true"
+        .tab-content
+          .tab-pane.active#single-link
+            br
 
-          .form-group
-            label.col-sm-2.control-label for="input-link-title"
-              | Title
-            .col-sm-10
-              input.form-control type="text" id="input-link-title" name="title" placeholder="Title"
+            form.form-horizontal role="form" action="/" method="POST"
+              .form-group
+                label.col-sm-2.control-label for="input-link-url"
+                  | URL
+                .col-sm-10
+                  input.form-control type="text" id="input-link-url"   name="url"   placeholder="URL"   required="true" autofocus="true"
 
-          .form-group
-            label.col-sm-2.control-label for="input-link-tags"
-              | Tags (comma-separated)
-            .col-sm-10
-              input.form-control type="text" id="input-link-tags" name="tags" placeholder="Tags"
+              .form-group
+                label.col-sm-2.control-label for="input-link-title"
+                  | Title
+                .col-sm-10
+                  input.form-control type="text" id="input-link-title" name="title" placeholder="Title"
 
-          .form-group
-            .col-sm-offset-2.col-sm-10
-              button.btn.btn-default type="submit"
-                span.glyphicon.glyphicon-flash
-                '
-                | Summon new Link
+              .form-group
+                label.col-sm-2.control-label for="input-link-tags"
+                  | Tags (comma-separated)
+                .col-sm-10
+                  input.form-control type="text" id="input-link-tags" name="tags" placeholder="Tags"
+
+              .form-group
+                .col-sm-offset-2.col-sm-10
+                  button.btn.btn-default type="submit"
+                    span.glyphicon.glyphicon-flash
+                    '
+                    | Summon new Link
+
+          .tab-pane#multiple-links
+            br
+            form.form-horizontal role="form" action="/" method="POST"
+              .form-group
+                label.col-sm-2.control-label for="input-link-url"
+                  | URLs (one per line)
+                .col-sm-10
+                  textarea.form-control type="textarea" rows="6" id="input-link-url"   name="url"   placeholder="URLs"   required="true" autofocus="true"
+
+              .form-group
+                label.col-sm-2.control-label for="input-link-tags"
+                  | Tags (comma-separated)
+                .col-sm-10
+                  input.form-control type="text" id="input-link-tags" name="tags" placeholder="Tags"
+
+              .form-group
+                .col-sm-offset-2.col-sm-10
+                  button.btn.btn-default type="submit"
+                    span.glyphicon.glyphicon-flash
+                    '
+                    | Summon new Links
+
 
       .modal-footer
         p lel
