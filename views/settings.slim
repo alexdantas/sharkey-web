@@ -26,25 +26,21 @@ html
     script src="/js/jquery-1.9.1.min.js"
     script src="/js/bootstrap.min.js"
 
-  body
+  body data-spy="scroll" data-target="#the-sidebar"
     == slim(:navbar,  locals: { page: page })
 
     .container-fluid
       .row
 
         / The sidebar
-        .col-sm-3.col-md-2.sidebar
+        .col-sm-3.col-md-2.sidebar#the-sidebar
           ul.nav.nav-sidebar
-            li class="#{ if page == 'home' then 'active' end }"
-              a href="#" General
-
-          ul.nav.nav-sidebar
-            li class="#{ if page == 'links' then 'active' end }"
-              a href="#" Import/Export
-
-          ul.nav.nav-sidebar
-            li class="#{ if page == 'tags' then 'active' end }"
-              a href="#" Erase Everything
+            li
+              a href="#general" General
+            li
+              a href="#import-export" Import/Export
+            li
+              a href="#erase-stuff" Erase Stuff
 
         / The actual content
         .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
