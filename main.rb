@@ -177,5 +177,21 @@ begin
     end
     redirect to '/'
   end
+
+  # Add several links at once
+  post '/bulk' do
+
+    params[:url].split.each do |url|
+      local_params = params
+
+      local_params[:title] = ''
+      local_params[:url]   = url
+      local_params[:tags]  = params[:tags]
+
+      create_link local_params
+    end
+
+    redirect to '/'
+  end
 end
 
