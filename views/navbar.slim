@@ -13,9 +13,59 @@
 
     .collapse.navbar-collapse
       ul.nav.navbar-nav
+        li
+          a href="#" data-toggle="modal" data-target="#input-link"
+            | Add Link
+
         li class="#{ if page == 'home'     then 'active' end }"
           a href="/" Home
 
         li class="#{ if page == 'settings' then 'active' end }"
           a href="/settings" Settings
+
+
+/
+  This thing will only get shown when requested
+  by a button
+.modal.fade#input-link tabindex="-1" role="dialog" aria-labelledby="input-link-label" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-hidden="true"
+          | &times;
+        h4.modal-title#input-link-label
+          | Summon New Link
+
+      .modal-body
+        p Links are never enough
+
+        form.form-horizontal role="form" action="/" method="POST"
+          .form-group
+            label.col-sm-2.control-label for="input-link-url"
+              | URL
+            .col-sm-10
+              input.form-control type="text" id="input-link-url"   name="url"   placeholder="URL"   required="true" autofocus="true"
+
+          .form-group
+            label.col-sm-2.control-label for="input-link-title"
+              | Title
+            .col-sm-10
+              input.form-control type="text" id="input-link-title" name="title" placeholder="Title"
+
+          .form-group
+            label.col-sm-2.control-label for="input-link-tags"
+              | Tags (comma-separated)
+            .col-sm-10
+              input.form-control type="text" id="input-link-tags" name="tags" placeholder="Tags"
+
+          .form-group
+            .col-sm-offset-2.col-sm-10
+              button.btn.btn-default type="submit"
+                span.glyphicon.glyphicon-flash
+                '
+                | Summon new Link
+
+      .modal-footer
+        p lel
+
 
