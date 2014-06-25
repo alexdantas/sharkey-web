@@ -1,0 +1,22 @@
+/
+  Layout for the settings page
+
+== slim(:navbar, locals: { page: "settings" })
+
+.col-md.12
+  .container
+
+    h1 Settings
+
+    ul.list-group
+      li.list-group-item
+        p Erase all links
+
+        form role="form" action="/all-links" method="POST"
+          input type="hidden" name="_method" value="DELETE"
+
+          button.btn.btn-xs.btn-warning type="submit" title="Delete All Links"
+            span.glyphicon.glyphicon-trash
+            '
+            | Delete All Links
+

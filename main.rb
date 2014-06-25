@@ -67,5 +67,17 @@ begin
 
     redirect to '/'
   end
+
+  # Go to the "Settings page"
+  get '/settings' do
+    slim :settings
+  end
+
+  # Caution!
+  delete '/all-links' do
+    Link.destroy
+
+    redirect to '/'
+  end
 end
 
