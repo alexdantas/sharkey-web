@@ -60,27 +60,31 @@ end
 # have been created and BEFORE the app starts
 DataMapper.finalize
 
-def create_link params
+# Helper functions that are accessible inside
+# every place
+helpers do
+  def create_link params
 
-  # All tags that will be associated to this Link
-  tags = []
+    # All tags that will be associated to this Link
+    tags = []
 
-  params[:tags].split(',').each do |tag|
+    params[:tags].split(',').each do |tag|
 
-    # Skipping if got a "string,like,,this,with,,,missing,colons,,,"
-    next if tag.nil?
+      # Skipping if got a "string,like,,this,with,,,missing,colons,,,"
+      next if tag.nil?
 
-    # If Tag exists, return it.
-    # Otherwise, create it
-    tags << Tag.first_or_create(name: tag)
+      # If Tag exists, return it.
+      # Otherwise, create it
+      tags << Tag.first_or_create(name: tag)
+    end
+
+    # The `params` Hash contains everything sent
+    # from the URL.
+    Link.create(title:    params[:title],
+                url:      params[:url],
+                added_at: DateTime.now,
+                tags:     tags)
   end
-
-  # The `params` Hash contains everything sent
-  # from the URL.
-  Link.create(title:    params[:title],
-              url:      params[:url],
-              added_at: DateTime.now,
-              tags:     tags)
 end
 
 begin
