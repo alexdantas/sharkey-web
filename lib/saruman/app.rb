@@ -1,3 +1,7 @@
+# Application file for Saruman
+#
+# Here we define the actions that Sinatra needs to take (routes)
+
 require 'sinatra'
 require 'slim'
 require 'data_mapper'

@@ -2,7 +2,7 @@
 #
 # Main executable for Saruman
 
-require File.expand_path(File.dirname(__FILE__) + '/main.rb')
+require File.expand_path(File.dirname(__FILE__) + '/../lib/saruman')
 require 'vegas'
 
 Vegas::Runner.new(Saruman::App, 'saruman', { foreground: true })
