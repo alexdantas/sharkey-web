@@ -247,6 +247,9 @@ module Saruman
            :locals => { page: "tags" })
     end
 
+    not_found do
+      slim(:'404', :locals => { url: request.fullpath })
+    end
   end
 end
 
