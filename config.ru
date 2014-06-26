@@ -1,3 +1,3 @@
 require './main'
 
-run Sinatra::Application
+run Saruman::App.new
