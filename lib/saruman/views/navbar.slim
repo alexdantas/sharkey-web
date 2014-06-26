@@ -74,7 +74,8 @@
           .tab-pane.active#single-link
             br
 
-            form.form-horizontal role="form" action="/" method="POST"
+            / Form that creates a Link
+            form.form-horizontal role="form" action="/link" method="POST"
               .form-group
                 label.col-sm-2.control-label for="input-link-url"
                   | URL
@@ -102,7 +103,8 @@
 
           .tab-pane#multiple-links
             br
-            form.form-horizontal role="form" action="/bulk" method="POST"
+            / Form that creates several Links
+            form.form-horizontal role="form" action="/links" method="POST"
               .form-group
                 label.col-sm-2.control-label for="input-link-url"
                   | URLs (one per line)

@@ -25,20 +25,20 @@ module Saruman
       # Nothing for now...
     end
 
-    # When the user requests root
+    # When the user wants to navigate to the main page
     get '/' do
       slim(:dashboard_index,
            :layout => :dashboard,
            :locals => { page: "home" })
     end
 
-    # When the user sends something to root
-    post '/' do
+    # When the user wants to create a single Link
+    post '/link' do
       Saruman::Link.create_link(params[:title],
                                 params[:url],
                                 params[:added_at],
                                 params[:tags])
-      redirect to '/'
+      redirect back
     end
 
     # When the user wants to delete a link
@@ -151,8 +151,8 @@ module Saruman
       redirect to '/'
     end
 
-    # Add several links at once
-    post '/bulk' do
+    # Create several links at once
+    post '/links' do
 
       params[:url].split.each do |url|
 
@@ -162,7 +162,7 @@ module Saruman
                                   params[:tags])
       end
 
-      redirect to '/'
+      redirect back
     end
 
     # Show list of all Saruman::Links

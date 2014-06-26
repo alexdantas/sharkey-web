@@ -56,6 +56,8 @@ module Saruman
     # @param added_at DateTime object or `nil` for DateTime.now
     #
     def self.create_link(title, url, added_at, tags)
+      # Silently fail
+      return if url.nil?
 
       # This array will contain the Tags objects
       # created here
@@ -73,7 +75,7 @@ module Saruman
 
       # Actually populating the database with
       # a new Link
-      Saruman::Link.create(title:    title,
+      Saruman::Link.create(title:    title || "",
                            url:      url,
                            added_at: added_at || DateTime.now,
                            tags:     the_tags)
