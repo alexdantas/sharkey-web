@@ -22,28 +22,7 @@ module Saruman
     # Helper functions that are accessible inside
     # every place
     helpers do
-      def create_link params
-
-        # All tags that will be associated to this Saruman::Link
-        tags = []
-
-        params[:tags].split(',').each do |tag|
-
-          # Skipping if got a "string,like,,this,with,,,missing,colons,,,"
-          next if tag.nil?
-
-          # If Saruman::Tag exists, return it.
-          # Otherwise, create it
-          tags << Saruman::Tag.first_or_create(name: tag)
-        end
-
-        # The `params` Hash contains everything sent
-        # from the URL.
-        Saruman::Link.create(title:    params[:title],
-                             url:      params[:url],
-                             added_at: DateTime.now,
-                             tags:     tags)
-      end
+      # Nothing for now...
     end
 
     # When the user requests root
@@ -55,8 +34,10 @@ module Saruman
 
     # When the user sends something to root
     post '/' do
-      create_link params
-
+      Saruman::Link.create_link(params[:title],
+                                params[:url],
+                                params[:added_at],
+                                params[:tags])
       redirect to '/'
     end
 
@@ -127,27 +108,46 @@ module Saruman
 
     # Import Saruman::Links from Bookmark HTML files
     # (eg. Firefox, Delicious, etc)
+    #
+    # POST requests automatically creates a temporary
+    # file for us.
+    #
     post '/import' do
+
+      # If we got no temporary file from POST let's just
+      # ignore this request
       unless (params[:file] and params[:file][:tempfile])
-        redirect to '/'
+        redirect back
       end
 
+      # Opening and parsing the temporary file
+      # @note Make _sure_ it's a HTML file!
       file = File.open(params['file'][:tempfile])
       html = Nokogiri::HTML(file)
       file.close
 
+      # Getting values from each <a> tag and it's
+      # attributes like="this"
       html.css('a').each do |link|
-        params = {}
 
-        params[:url]   = link.attributes['href'].value
-        params[:title] = link.text
-        params[:tags]  = link.attributes['tags'].value
+        title    = link.text
+        url      = link.attributes['href'].value
+        tags     = link.attributes['tags'].value
 
-        # Support ADDED_AT
-        # params[:added_at] = Time.at(link.attributes['add_date'].value.to_i)
+        # Some links have the date when added (UNIX Timestamp)
+        # and others don't
+        added_at = if   link.attributes['add_date'].value.empty?
+                   then nil
+                   else Time.at(link.attributes['add_date'].value.to_i)
+                   end
 
-        create_link params
+        Saruman::Link.create_link(title,
+                                  url,
+                                  added_at,
+                                  tags)
       end
+
+      # Hooray, everything went out fine!
       redirect to '/'
     end
 
@@ -155,13 +155,11 @@ module Saruman
     post '/bulk' do
 
       params[:url].split.each do |url|
-        local_params = params
 
-        local_params[:title] = ''
-        local_params[:url]   = url
-        local_params[:tags]  = params[:tags]
-
-        create_link local_params
+        Saruman::Link.create_link(nil,
+                                  url,
+                                  nil,
+                                  params[:tags])
       end
 
       redirect to '/'
