@@ -95,7 +95,9 @@ module Saruman
       the_link = Saruman::Link.get(params[:id])
       redirect to '/' if not the_link
 
-      slim(:link, locals: { link: the_link })
+      slim(:link,
+           :layout => :dashboard,
+           locals: { page: "link", link: the_link })
     end
 
     # Go to the Saruman::Tag page of specific ID
@@ -103,7 +105,9 @@ module Saruman
       the_tag = Saruman::Tag.get(params[:id])
       redirect to '/' if not the_tag
 
-      slim(:tag, locals: { tag: the_tag })
+      slim(:tag,
+           :layout => :dashboard,
+           locals: { page: "tag", tag: the_tag })
     end
 
     # Import Saruman::Links from Bookmark HTML files
