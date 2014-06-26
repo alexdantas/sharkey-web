@@ -8,15 +8,15 @@ p Welcome to Saruman Link!
 p You have...
 
 ul
-  - if Link.all.size == 0
+  - if Saruman::Link.all.size == 0
     li no links;
   - else
-    li #{Link.all.size} links;
+    li #{Saruman::Link.all.size} links;
 
-  - if Tag.all.size == 0
+  - if Saruman::Tag.all.size == 0
     li no tags;
   - else
-    li #{Tag.all.size} tags;
+    li #{Saruman::Tag.all.size} tags;
 
 h2.sub-header Awesome!
 
