@@ -25,10 +25,12 @@ END
 
   spec.required_ruby_version = '>= 1.9.0'
 
+  # Note that the system MUST HAVE sqlite3 and libsqlite3-dev
   spec.add_dependency 'sinatra', '>= 1.2.1'
   spec.add_dependency 'slim'
   spec.add_dependency 'data_mapper'
   spec.add_dependency 'dm-types'
+  spec.add_dependency 'dm-sqlite-adapter'
   spec.add_dependency 'chronic_duration'
   spec.add_dependency 'nokogiri'
   spec.add_dependency 'vegas'

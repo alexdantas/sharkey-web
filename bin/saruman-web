@@ -5,5 +5,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/../lib/saruman')
 require 'vegas'
 
-Vegas::Runner.new(Saruman::App, 'saruman', { foreground: true })
+Vegas::Runner.new(Saruman::App, 'saruman')
 
