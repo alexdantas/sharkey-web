@@ -17,31 +17,13 @@ li.link.list-group-item
         - else
           a href="#{link.url}" = link.title
 
-      .link-added
-        ruby:
-          #
-          # Full date where the link was added
-          added_full = link.added_at.strftime '%H:%m %d-%m-%Y'
-          #
-          # Now we'll calculate a short, human-friendly
-          # version of the above (like '2 days, 5 hours')
-          added_secs = link.added_at.strftime('%s').to_i
-          now_secs   = DateTime.now.strftime('%s').to_i
-          #
-          added_short = ChronicDuration.output(now_secs-added_secs)
-        ' Added
-        a href="#" title="#{added_full}"
-          | #{added_short}
-        '
-        | ago
-
       .link-tags
         - if link.tags
           - link.tags.each do |tag|
             a.link-tag href="/tag/#{tag.id}" title="#{tag.name}"
               span.badge = tag.name
     .col-md-4
-      .pull-right
+      .pull-righta
         form.link-delete action="/link/#{link.id}" method="POST"
           .form-group
             /
@@ -53,4 +35,21 @@ li.link.list-group-item
               span.glyphicon.glyphicon-trash
               '
               | Destroy
+
+        .link-added
+          ruby:
+            #
+            # Full date where the link was added
+            added_full = link.added_at.strftime '%H:%m %d-%m-%Y'
+            #
+            # Now we'll calculate a short, human-friendly
+            # version of the above (like '2 days, 5 hours')
+            added_secs = link.added_at.strftime('%s').to_i
+            now_secs   = DateTime.now.strftime('%s').to_i
+            #
+            added_short = ChronicDuration.output(now_secs-added_secs)
+          | Added
+          a<> href="#" title="#{added_full}" = added_short
+          | ago
+
 
