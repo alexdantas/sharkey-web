@@ -6,7 +6,30 @@ h2.sub-header#general General Settings
 
 p Aww yeah
 
-h2.sub-header#import-export Data
+h2.sub-header#appearance Appearance
+
+.row.setting
+  .col-md-12
+    h4 Date format
+.row
+  .col-md-8
+    p.help-block
+      | How the date will get shown besides Links and Tags.
+    p.help-block
+      | Relative date (e.g. '8 hours ago') or full date
+        format (18:05 22-12-2014).
+
+  .col-md-4
+    form role="form" action="/import" method="POST" enctype="multipart/form-data"
+      .btn-group data-toggle="buttons"
+        label.btn.btn-primary.active
+          input type="radio" name="date-format" value="relative" checked="yes"
+            | Relative Date
+        label.btn.btn-primary
+          input type="radio" name="date-format" value="full"
+            | Full Date
+
+h2.sub-header#data Data
 
 .row.setting
   .col-md-12
