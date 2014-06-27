@@ -8,6 +8,10 @@ li.link.list-group-item
   .row
     .col-md-8
       .link-title
+        a.link-internal-link href="/link/#{link.id}"
+          span.label.label-primary
+            span.glyphicon.glyphicon-link
+
         - if link.title.empty?
           a href="#{link.url}" = link.url
         - else

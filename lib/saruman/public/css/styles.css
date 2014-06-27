@@ -83,7 +83,8 @@ body {
 }
 
 /* specific to Saruman settings */
-.link-title {
+.link-title,
+.tag-title {
 	width       : 100%;
 	font-size   : 120%;
 	font-weight : bold;
@@ -100,6 +101,10 @@ body {
 }
 .link-tag span:hover {
 	background-color: blue;
+}
+.link-internal-link,
+.tag-internal-link    {
+	margin-right: 15px;
 }
 
 .random-sentence {
