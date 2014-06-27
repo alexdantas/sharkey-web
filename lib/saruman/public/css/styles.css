@@ -103,3 +103,8 @@ body {
 	font-style: italic;
 }
 
+.setting h4 {
+	border-bottom: 1px solid #eee;
+	padding-bottom: 3px;
+}
+

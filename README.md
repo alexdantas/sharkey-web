@@ -26,6 +26,12 @@ Importing:
 * [Random Ruby Thoughts: Upload Files in Sinatra](http://alfuken.tumblr.com/post/874428235/upload-and-download-files-in-sinatra)
 * [The Bastards Book of Ruby: Parsing HTML with Nokogiri](http://ruby.bastardsbook.com/chapters/html-parsing/)
 
+### Notes
+
+* When running this under development (with `rake preview`) the requests
+  seems _mother-fricking slow_; that's because of `shotgun` and it's tendency
+  to restart the application on each request.
+
 ## License
 
 MIT
