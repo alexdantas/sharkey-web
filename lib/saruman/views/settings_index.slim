@@ -20,21 +20,21 @@ h2.sub-header#appearance Appearance
         format (18:05 22-12-2014).
 
   .col-md-4
-    form role="form" action="/setting/date_format" method="POST"
+    form role="form" action="/setting" method="POST"
       .btn-group data-toggle="buttons"
 
-        - if Saruman::Setting[:date_format] == 'relative'
-          label.btn.btn-primary.active
+        - if Saruman::Setting['date_format'] == 'relative'
+          label.btn.btn-primary.ajax-radio.active
             input type="radio" name="date_format" value="relative" checked="true"
               | Relative Date
-          label.btn.btn-primary
+          label.btn.btn-primary.ajax-radio
             input type="radio" name="date_format" value="full"     checked="false"
               | Full Date
         - else
-          label.btn.btn-primary
+          label.btn.btn-primary.ajax-radio
             input type="radio" name="date_format" value="relative" checked="false"
               | Relative Date
-          label.btn.btn-primary.active
+          label.btn.btn-primary.ajax-radio.active
             input type="radio" name="date_format" value="full"     checked="true"
               | Full Date
 
@@ -48,10 +48,10 @@ h2.sub-header#appearance Appearance
       | Show progress bar when loading the page
 
   .col-md-4
-    form role="form" action="/setting/loading_bar" method="POST"
+    form role="form" action="/setting" method="POST"
       .btn-group data-toggle="buttons"
 
-        - if Saruman::Setting[:loading_bar]
+        - if Saruman::Setting['loading_bar']
           label.btn.btn-primary.ajax-radio.active
             input type="radio" name="loading_bar" value="true" checked="true"
               | On

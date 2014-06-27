@@ -18,8 +18,8 @@ module Saruman
     #       that the setting file exist.
     def reset
       @values = {
-        :loading_bar => true,
-        :date_format => 'relative'
+        'loading_bar' => 'true',
+        'date_format' => 'relative'
       }
     end
 

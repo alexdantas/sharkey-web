@@ -21,6 +21,4 @@ tmp
 *.a
 mkmf.log
 *.db
----
-:loading_bar: true
-:date_format: relative
+settings.yml

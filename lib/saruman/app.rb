@@ -209,12 +209,14 @@ module Saruman
       slim(:'404', :locals => { url: request.fullpath })
     end
 
-    post '/setting/:name' do
+    post '/setting' do
       # Error for non-existing setting
-      return 500 unless @setting[params[:name]]
+      return 500 unless Saruman::Setting[params[:name]]
+      return 500 unless params[:value]
 
-      s
-
+      Saruman::Setting[params[:name]] = params[:value]
+      Saruman::Setting.save
+      200
     end
   end
 end
