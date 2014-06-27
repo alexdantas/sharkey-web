@@ -85,12 +85,10 @@ body {
 /* specific to Saruman settings */
 
 /* magic thing that makes it appear only when hovered */
-.link-added,
-.link-delete {
+.hoverable-children {
 	display: none;
 }
-.link:hover .link-added,
-.link:hover .link-delete {
+.hoverable-parent:hover .hoverable-children {
 	display: block;
 }
 

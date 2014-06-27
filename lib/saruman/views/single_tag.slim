@@ -4,7 +4,7 @@
   list
   Local variable: tag
 
-li.tag.list-group-item
+li.tag.list-group-item.hoverable-parent
   .row
     .col-md-8
       .tag-title
@@ -14,7 +14,7 @@ li.tag.list-group-item
 
         a href="/tag/#{tag.id}" = tag.name
 
-    .col-md-4
+    .col-md-4.hoverable-children
       .pull-right
         form.tag-delete action="/tag/#{tag.id}" method="POST"
           .form-group
@@ -24,8 +24,7 @@ li.tag.list-group-item
               to recognize it as DELETE anyway
             input type="hidden" name="_method" value="DELETE"
             button.btn.btn-xs.btn-default type="submit" title="Delete Tag"
-              span.glyphicon.glyphicon-trash
-              '
+              span> class="glyphicon glyphicon-trash"
               | Destroy
 
   .row
