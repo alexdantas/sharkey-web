@@ -92,6 +92,9 @@ body {
 	font-style: italic;
 }
 
+.link-tag:first-child {
+	margin-left: 0;
+}
 .link-tag {
 	margin-left: 5px;
 }
