@@ -23,14 +23,14 @@ li.link.list-group-item.hoverable-parent
             a.link-tag href="/tag/#{tag.id}" title="#{tag.name}"
               span.badge = tag.name
     .col-md-4.hoverable-children
-      form.link-delete action="/link/#{link.id}" method="POST"
+      form action="/link/#{link.id}" method="POST"
         .form-group
           /
             Most browsers don't recognize the DELETE
             HTTP method, so this is a fake for Sinatra
             to recognize it as DELETE anyway
           input type="hidden" name="_method" value="DELETE"
-          button.btn.btn-xs.btn-default type="submit" title="Delete Link"
+          button.link-delete.btn.btn-xs.btn-default type="submit" title="Delete Link"
             span.glyphicon.glyphicon-trash
             '
             | Destroy

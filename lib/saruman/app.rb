@@ -50,7 +50,11 @@ module Saruman
       the_link.taggings.destroy
       the_link.destroy
 
-      redirect back
+      # If this is an AJAX request, we don't need
+      # to redirect anywhere!
+      # The JavaScript is responsible for updating
+      # the page, not us!
+      redirect back unless request.xhr?
     end
 
     # When the user wants to delete a Saruman::Tag
