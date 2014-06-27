@@ -4,7 +4,7 @@
   list
   Local variable: tag
 
-li.tag.list-group-item.hoverable-parent
+li.tag.list-group-item.hoverable-parent.ajax-delete-parent
   .row
     .col-md-8
       .tag-title
@@ -23,7 +23,7 @@ li.tag.list-group-item.hoverable-parent
               HTTP method, so this is a fake for Sinatra
               to recognize it as DELETE anyway
             input type="hidden" name="_method" value="DELETE"
-            button.btn.btn-xs.btn-default type="submit" title="Delete Tag"
+            button.ajax-delete.btn.btn-xs.btn-default type="submit" title="Delete Tag"
               span> class="glyphicon glyphicon-trash"
               | Destroy
 
