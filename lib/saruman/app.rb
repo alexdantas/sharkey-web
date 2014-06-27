@@ -16,8 +16,14 @@ require 'nokogiri'
 # Create and initialize the databases
 require 'saruman/models'
 
+require 'saruman/setting'
+
 module Saruman
   class App < Sinatra::Application
+
+    # Global in-app settings
+    # (not related to Sinatra per se)
+    Saruman::Setting.initialize
 
     # Helper functions that are accessible inside
     # every place
@@ -66,7 +72,11 @@ module Saruman
       the_tag.taggings.destroy
       the_tag.destroy
 
-      redirect back
+      # If this is an AJAX request, we don't need
+      # to redirect anywhere!
+      # The JavaScript is responsible for updating
+      # the page, not us!
+      redirect back unless request.xhr?
     end
 
     # Go to the "Settings page"
@@ -197,6 +207,14 @@ module Saruman
 
     not_found do
       slim(:'404', :locals => { url: request.fullpath })
+    end
+
+    post '/setting/:name' do
+      # Error for non-existing setting
+      return 500 unless @setting[params[:name]]
+
+      s
+
     end
   end
 end

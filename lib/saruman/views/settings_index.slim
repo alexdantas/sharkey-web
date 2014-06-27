@@ -20,14 +20,52 @@ h2.sub-header#appearance Appearance
         format (18:05 22-12-2014).
 
   .col-md-4
-    form role="form" action="/import" method="POST" enctype="multipart/form-data"
+    form role="form" action="/setting/date_format" method="POST"
       .btn-group data-toggle="buttons"
-        label.btn.btn-primary.active
-          input type="radio" name="date-format" value="relative" checked="yes"
-            | Relative Date
-        label.btn.btn-primary
-          input type="radio" name="date-format" value="full"
-            | Full Date
+
+        - if Saruman::Setting[:date_format] == 'relative'
+          label.btn.btn-primary.active
+            input type="radio" name="date_format" value="relative" checked="true"
+              | Relative Date
+          label.btn.btn-primary
+            input type="radio" name="date_format" value="full"     checked="false"
+              | Full Date
+        - else
+          label.btn.btn-primary
+            input type="radio" name="date_format" value="relative" checked="false"
+              | Relative Date
+          label.btn.btn-primary.active
+            input type="radio" name="date_format" value="full"     checked="true"
+              | Full Date
+
+
+.row.setting
+  .col-md-12
+    h4 Loading bar
+.row
+  .col-md-8
+    p.help-block
+      | Show progress bar when loading the page
+
+  .col-md-4
+    form role="form" action="/setting/loading_bar" method="POST"
+      .btn-group data-toggle="buttons"
+
+        - if Saruman::Setting[:loading_bar]
+          label.btn.btn-primary.ajax-radio.active
+            input type="radio" name="loading_bar" value="true" checked="true"
+              | On
+          label.btn.btn-primary.ajax-radio
+            input type="radio" name="loading_bar" value="false" checked="false"
+              | Off
+        - else
+          label.btn.btn-primary.ajax-radio
+            input type="radio" name="loading_bar" value="true" checked="true"
+              | On
+          label.btn.btn-primary.ajax-radio.active
+            input type="radio" name="loading_bar" value="false" checked="false"
+              | Off
+
 
 h2.sub-header#data Data
 
