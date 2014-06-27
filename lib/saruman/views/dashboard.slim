@@ -18,13 +18,21 @@ html
     title Hello, Sinatra!
 
     link rel="stylesheet" media="screen, projection" href="/css/bootstrap.css"
+    - if Saruman::Setting['loading_bar'] == 'true'
+      link rel="stylesheet" href="/css/nprogress.css"
+
     link rel="stylesheet" media="screen, projection" href="/css/styles.css"
+
+
 
     /[if lt IE 9]
       script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"
 
     script src="/js/jquery-1.9.1.min.js"
     script src="/js/bootstrap.min.js"
+    - if Saruman::Setting['loading_bar'] == 'true'
+      script src="/js/nprogress.js"
+
     script src="/js/scripts.js"
 
   body

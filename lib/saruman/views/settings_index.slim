@@ -51,7 +51,7 @@ h2.sub-header#appearance Appearance
     form role="form" action="/setting" method="POST"
       .btn-group data-toggle="buttons"
 
-        - if Saruman::Setting['loading_bar']
+        - if Saruman::Setting['loading_bar'] == 'true'
           label.btn.btn-primary.ajax-radio.active
             input type="radio" name="loading_bar" value="true" checked="true"
               | On
