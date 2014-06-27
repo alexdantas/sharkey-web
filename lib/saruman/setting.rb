@@ -32,7 +32,7 @@ module Saruman
       self.reset
 
       if File.exist? SETTING_FILE
-        YAML::load_file SETTING_FILE
+        @values = YAML::load_file SETTING_FILE
       else
         self.save
       end
