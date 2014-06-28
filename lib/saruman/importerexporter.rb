@@ -25,13 +25,16 @@ module Saruman
 
         title = link.text
         url   = link.attributes['href'].value
-        tags  = link.attributes['tags'].value
+        tags  = if   link.attributes['tags']
+                then link.attributes['tags'].value
+                else ""
+                end
 
         # Some links have the date when added (UNIX Timestamp)
         # and others don't
-        added_at = if   link.attributes['add_date'].value.empty?
-                   then nil
-                   else Time.at(link.attributes['add_date'].value.to_i)
+        added_at = if   link.attributes['add_date']
+                   then Time.at(link.attributes['add_date'].value.to_i)
+                   else nil
                    end
 
         Saruman::Link.create_link(title,
