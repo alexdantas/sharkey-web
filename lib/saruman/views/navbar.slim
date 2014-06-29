@@ -25,24 +25,24 @@
       ul.nav.navbar-nav.navbar-right
 
         li class="#{ if page == 'home'     then 'active' end }"
-          a href="/"
+          a#keybind-home href="/"
             span.glyphicon.glyphicon-home
             '
             | Home
 
         li class="#{ if page == 'settings' then 'active' end }"
-          a href="/settings"
+          a#keybind-settings href="/settings"
             span.glyphicon.glyphicon-cog
             '
             |Settings
 
         li
-          a href="/help"
+          a#keybind-help href="/help"
             span.glyphicon.glyphicon-question-sign
             '
             | Help
         li
-          a href="/about"
+          a#keybind-about href="/about"
             span.glyphicon.glyphicon-info-sign
             '
             | About
@@ -63,11 +63,11 @@
         p.random-sentence
           | ...Because links are never enough
 
-        ul.nav.nav-pills
+        ul.nav.nav-pills#single-multiple-link-tab role="tablist"
           li.active
-            a href="#single-link" data-toggle="tab" Single Link
+            a#single-link-activate href="#single-link" data-toggle="tab" Single Link
           li
-            a href="#multiple-links" data-toggle="tab" Multiple Links
+            a#multiple-link-activate href="#multiple-links" data-toggle="tab" Multiple Links
       .modal-body
 
 
@@ -164,10 +164,10 @@
             / Form that creates several Links
             form.form-horizontal role="form" action="/links" method="POST"
               .form-group
-                label.col-sm-2.control-label for="input-link-url"
+                label.col-sm-2.control-label for="input-links-url"
                   | URLs (one per line)
                 .col-sm-10
-                  textarea.form-control type="textarea" rows="6" id="input-link-url" name="url" placeholder="URLs" required="true" autofocus="true"
+                  textarea.form-control type="textarea" rows="6" id="input-links-url" name="url" placeholder="URLs" required="true" autofocus="true"
 
               .form-group
                 .col-sm-offset-2.col-sm-10

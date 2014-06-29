@@ -34,6 +34,7 @@ html
     script src="/js/bootstrap.min.js"
     - if Saruman::Setting['loading_bar'] == 'true'
       script src="/js/nprogress.js"
+    script src="/js/mousetrap.min.js"
 
     script src="/js/scripts.js"
 
@@ -53,19 +54,19 @@ html
 
           ul.nav.nav-sidebar
             li class="#{ if page == 'links' then 'active' end }"
-              a href="/links"
+              a#keybind-links href="/links"
                 span> class="glyphicon glyphicon-link"
                 | Links
                 span.badge.pull-right = Saruman::Link.all.size
 
             li class="#{ if page == 'tags' then 'active' end }"
-              a href="/tags"
+              a#keybind-tags href="/tags"
                 span> class="glyphicon glyphicon-tags"
                 | Tags
                 span.badge.pull-right = Saruman::Tag.all.size
 
             li class="#{ if page == 'categories' then 'active' end }"
-              a href="/categories"
+              a#keybind-categories href="/categories"
                 span> class="glyphicon glyphicon-book"
                 | Categories
                 span.badge.pull-right = Saruman::Category.all.size
