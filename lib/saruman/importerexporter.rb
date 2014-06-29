@@ -40,7 +40,8 @@ module Saruman
         Saruman::Link.create_link(title,
                                   url,
                                   added_at,
-                                  tags)
+                                  tags,
+                                  nil)
       end
 
     end

@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'saruman/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'saruman'
+  spec.name          = 'saruman-web'
   spec.version       = Saruman::VERSION
   spec.authors       = ["Alexandre Dantas"]
   spec.email         = ["eu@alexdantas.net"]
