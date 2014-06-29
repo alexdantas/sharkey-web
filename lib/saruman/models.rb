@@ -118,7 +118,15 @@ module Saruman
     belongs_to :link, :key => true
   end
 
-  # Category Links can have
+  # Category for Links.
+  #
+  # While a Link can have several Tags, it can only
+  # have a single Category.
+  #
+  # Think of it as a folder on your Bookmarks browser.
+  #
+  # A category can have _one_ parent and _many_ children.
+  #
   class Category
     include DataMapper::Resource
 
@@ -129,7 +137,47 @@ module Saruman
     has n, :categorizations
     has n, :links, :through => :categorizations
 
+    # Access the parent through Category.parent
+    has 1, :categoryParent, :child_key => [ :source_id ]
+    has 1, :parent, self, :through => :categoryParent, :via => :target
 
+    # Access the childs through Category.childs
+    has n, :categoryChilds, :child_key => [ :source_id ]
+    has n, :childs, self, :through => :categoryChilds, :via => :target
+
+    def add_child child
+      throw 'Adding self as child' if child == self
+
+      self.childs << child
+      child.parent = self
+
+      self.save
+      self
+    end
+
+    def remove_child child
+      throw 'Removing self as child' if child == self
+
+      self.childs.delete(child)
+      child.parent = nil
+
+      self.reload
+      self
+    end
+  end
+
+  class CategoryParent
+    include DataMapper::Resource
+
+    belongs_to :source, 'Category', :key => true
+    belongs_to :target, 'Category', :key => true
+  end
+
+  class CategoryChild
+    include DataMapper::Resource
+
+    belongs_to :source, 'Category', :key => true
+    belongs_to :target, 'Category', :key => true
   end
 
   class Categorization
