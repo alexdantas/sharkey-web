@@ -47,10 +47,54 @@
             '
             | About
 
-/
-  The 'Add Button' dialog
-  It will only get shown when requested by a button
+/ Helper that shows the Keybindings
+.modal.fade#keybindings tabindex="-1" role="dialog" aria-labelledby="keybinding-label" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-hidden="true"
+          | &times;
+        h4.modal-title#input-link-label
+          | Key bindings
 
+      .modal-body
+
+        table.table
+          thead
+            tr
+              th key
+              th effect
+          tbody
+            tr
+              td a
+              td Add single Link
+            tr
+              td a
+              td Add multiple Links
+            tr
+              td d
+              td Go to the Dashboard
+            tr
+              td s
+              td Go to Settings
+            tr
+              td h
+              td Show Help
+            tr
+              td l
+              td Show Links
+            tr
+              td t
+              td Show Tags
+            tr
+              td c
+              td Show Categories
+            tr
+              td k
+              td Show this window
+
+/ The 'Add Button' dialog
+  It will only get shown when requested by a button
 .modal.fade#input-link tabindex="-1" role="dialog" aria-labelledby="input-link-label" aria-hidden="true"
   .modal-dialog
     .modal-content
