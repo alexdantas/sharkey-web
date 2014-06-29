@@ -57,6 +57,7 @@ module Saruman
     #
     # @param tags     String with comma-separated values
     # @param added_at DateTime object or `nil` for DateTime.now
+    # @param category An ID of _existing_ category
     #
     def self.create_link(title, url, added_at, tags, category)
       # Silently fail
@@ -76,19 +77,13 @@ module Saruman
         the_tags << Saruman::Tag.first_or_create(name: tag)
       end
 
-      # Also, creating the categories if existing
-      the_category = nil
-      if category
-        the_category = Saruman::Category.first_or_create(name: category)
-      end
-
       # Actually populating the database with
       # a new Link
       Saruman::Link.create(title:    title || "",
                            url:      url,
                            added_at: added_at || DateTime.now,
                            tags:     the_tags,
-                           category: the_category)
+                           category: Saruman::Category.get(category))
       end
   end
 
