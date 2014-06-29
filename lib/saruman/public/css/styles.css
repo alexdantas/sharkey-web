@@ -136,7 +136,10 @@ body {
 	top: 50px;
 }
 
-
+/* the awesome tagcloud */
+#tagcloud a {
+	margin: 0 2px;
+}
 
 
 
