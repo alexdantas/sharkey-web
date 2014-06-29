@@ -63,16 +63,16 @@
         p.random-sentence
           | ...Because links are never enough
 
-      .modal-body
         ul.nav.nav-pills
           li.active
             a href="#single-link" data-toggle="tab" Single Link
           li
             a href="#multiple-links" data-toggle="tab" Multiple Links
+      .modal-body
+
 
         .tab-content
           .tab-pane.active#single-link
-            br
 
             / Form that creates a Link
             form.form-horizontal role="form" action="/link" method="POST"
@@ -81,6 +81,13 @@
                   | URL
                 .col-sm-10
                   input.form-control type="text" id="input-link-url"   name="url"   placeholder="URL"   required="true" autofocus="true"
+
+              .form-group
+                .col-sm-offset-2.col-sm-10
+                  button.btn.btn-default type="submit"
+                    span.glyphicon.glyphicon-flash
+                    '
+                    | Summon new Link
 
               .form-group
                 label.col-sm-2.control-label for="input-link-title"
@@ -100,15 +107,7 @@
                 .col-sm-10
                   input.form-control type="text" id="input-link-category" name="category" placeholder="Category"
 
-              .form-group
-                .col-sm-offset-2.col-sm-10
-                  button.btn.btn-default type="submit"
-                    span.glyphicon.glyphicon-flash
-                    '
-                    | Summon new Link
-
           .tab-pane#multiple-links
-            br
             / Form that creates several Links
             form.form-horizontal role="form" action="/links" method="POST"
               .form-group
@@ -116,6 +115,13 @@
                   | URLs (one per line)
                 .col-sm-10
                   textarea.form-control type="textarea" rows="6" id="input-link-url" name="url" placeholder="URLs" required="true" autofocus="true"
+
+              .form-group
+                .col-sm-offset-2.col-sm-10
+                  button.btn.btn-default type="submit"
+                    span.glyphicon.glyphicon-flash
+                    '
+                    | Summon new Links
 
               .form-group
                 label.col-sm-2.control-label for="input-link-tags"
@@ -129,16 +135,9 @@
                 .col-sm-10
                   input.form-control type="text" id="input-link-category" name="category" placeholder="Category"
 
-              .form-group
-                .col-sm-offset-2.col-sm-10
-                  button.btn.btn-default type="submit"
-                    span.glyphicon.glyphicon-flash
-                    '
-                    | Summon new Links
-
-
-      .modal-footer
-        p lel
+      / If you ever want to add a footer some day,
+        just uncomment these two lines
+        .modal-footer
 
 / Settings about the 'Add Link' modal
 javascript:
