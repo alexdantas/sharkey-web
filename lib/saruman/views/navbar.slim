@@ -102,10 +102,10 @@
                   input.form-control type="text" id="input-link-tags" name="tags" placeholder="Tags"
 
               .form-group
-                label.col-sm-2.control-label for="input-link-category"
+                label.col-sm-2.control-label for="input-link-category-one"
                   | Category
                 .col-sm-10
-                  select.form-control#input-link-category name="category" placeholder="Category"
+                  select.form-control#input-link-category-one name="category" placeholder="Category"
                     ruby:
                       # This magic function shows all Categories in
                       # hierarchical order. Just like:
@@ -138,7 +138,7 @@
 
                 .col-sm-offset-2.col-sm-10
                   button.btn.btn-default#new-category
-                    span> class="glyphicon glyphicon-fire"
+                    span> class="glyphicon glyphicon-book"
                     | New Category
 
             form.form-horizontal#new-category-form role="form" action="/category" method="POST"
@@ -156,7 +156,7 @@
                     == select_options
 
                   button.btn.btn-default#new-category-button type="submit"
-                    span> class="glyphicon glyphicon-fire"
+                    span> class="glyphicon glyphicon-book"
                     | New Category
 
 
@@ -183,10 +183,11 @@
                   input.form-control type="text" id="input-link-tags" name="tags" placeholder="Tags"
 
               .form-group
-                label.col-sm-2.control-label for="input-link-category"
+                label.col-sm-2.control-label for="input-link-category-two"
                   | Category
                 .col-sm-10
-                  input.form-control type="text" id="input-link-category" name="category" placeholder="Category"
+                  select.form-control#input-link-category-two name="category" placeholder="Category"
+                    == select_options
 
       / If you ever want to add a footer some day,
         just uncomment these two lines

@@ -31,7 +31,7 @@ h2.sub-header#appearance Appearance
                 option value="#{dir}" = dir
 
         button.btn.btn-primary type="submit" title="Apply"
-          span> class="glyphicon glyphicon-trash"
+          span> class="glyphicon glyphicon-picture"
           | Apply
 
 .row.setting
@@ -107,8 +107,7 @@ h2.sub-header#data Data
     form role="form" action="/import" method="POST" enctype="multipart/form-data"
       input type="file" name="file"
       button.btn.btn-primary type="submit" title="Import"
-        span.glyphicon.glyphicon-trash
-        '
+        span> class="glyphicon glyphicon-import"
         | Import
 
 .row.setting
@@ -118,6 +117,7 @@ h2.sub-header#data Data
   .col-md-8
     p.help-block Not supported...
   .col-md-4
+    span> class="glyphicon glyphicon-export"
     p ...yet
 
 h2.sub-header#erase-stuff Erase Stuff
@@ -187,6 +187,6 @@ p
 
 
       button.btn.btn-sm.btn-danger type="submit" title="Delete Everything"
-        span> class="glyphicon glyphicon-trash"
+        span> class="glyphicon glyphicon-fire"
         | Destroy all Stuff
 
