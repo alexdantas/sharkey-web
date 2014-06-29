@@ -276,6 +276,14 @@ module Saruman
       redirect to '/'
     end
 
+    get '/tagcloud' do
+      @tags = Saruman::Tag.all
+
+      slim(:tagcloud,
+           :layout => :dashboard,
+           :locals => { page: "tagcloud" })
+    end
+
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     # Error-handling
 

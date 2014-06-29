@@ -1,0 +1,32 @@
+
+h1.page-header Tag Cloud
+
+/ Artbitrary values
+- smaller = 12
+- bigger  = 0
+
+#tagcloud
+  - @tags.each do |tag|
+    - smaller = tag.links.count if tag.links.count < smaller
+    - bigger  = tag.links.count if tag.links.count > bigger
+    a href="/tag/#{tag.id}" rel="#{tag.links.count}" = tag.name
+
+/ Actually activating Tag Cloud
+javascript:
+
+  $(function () {
+    $.fn.tagcloud.defaults = {
+      size: {
+        start: #{smaller},
+        end:   #{bigger},
+        unit: 'pt'
+      },
+      color: {
+        start: '#000',
+          end: '#428bca'
+      }
+    };
+
+    $('#tagcloud a').tagcloud();
+  });
+
