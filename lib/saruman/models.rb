@@ -164,6 +164,10 @@ module Saruman
       self.reload
       self
     end
+
+    def self.orphans
+      all.select { |me| me.parent.nil? }
+    end
   end
 
   class CategoryParent

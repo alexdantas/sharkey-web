@@ -29,11 +29,14 @@ li.category.list-group-item.hoverable-parent.ajax-delete-parent
 
   .row
     .col-md-12
-      .category-links
-        - if category.links.empty?
-          p No Links with this Category
+      / Recursively showing children inside their parents
+      - if not category.childs.empty?
+        ul.categories.list-group
+          - category.childs.each do |child|
+            == slim(:single_category, locals: { category: child })
 
-        - else
+      .category-links
+        - if not category.links.empty?
           ul.list-group
             - category.links.each do |link|
               li.list-group-item

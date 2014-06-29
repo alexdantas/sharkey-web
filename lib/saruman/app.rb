@@ -193,9 +193,11 @@ module Saruman
     end
 
     get '/categories' do
-      # Creating an instance variable
-      # (visible inside all Views)
-      @categories = Saruman::Category.all
+
+      # Let's start by showing all Categories
+      # WITHOUT parents.
+      # Then, recursively show their children
+      @categories = Saruman::Category.orphans
 
       slim(:categories,
            :layout => :dashboard,
