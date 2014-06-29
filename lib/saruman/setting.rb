@@ -19,7 +19,8 @@ module Saruman
     def reset
       @values = {
         'loading_bar' => 'true',
-        'date_format' => 'relative'
+        'date_format' => 'relative',
+        'theme'       => 'bootstrap'
       }
     end
 
@@ -33,9 +34,8 @@ module Saruman
 
       if File.exist? SETTING_FILE
         @values = YAML::load_file SETTING_FILE
-      else
-        self.save
       end
+      self.save
     end
 
     # Writes settings into the file
