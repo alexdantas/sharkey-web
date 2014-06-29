@@ -45,6 +45,9 @@ module Saruman
     has n, :taggings
     has n, :tags, :through => :taggings
 
+    has 1, :categorization
+    has 1, :category, :through => :categorization
+
     # Creates a new Link with specified parameters.
     #
     # @note Link#create is a reserved method for DataMapper
@@ -55,7 +58,7 @@ module Saruman
     # @param tags     String with comma-separated values
     # @param added_at DateTime object or `nil` for DateTime.now
     #
-    def self.create_link(title, url, added_at, tags)
+    def self.create_link(title, url, added_at, tags, category)
       # Silently fail
       return if url.nil?
 
@@ -73,12 +76,19 @@ module Saruman
         the_tags << Saruman::Tag.first_or_create(name: tag)
       end
 
+      # Also, creating the categories if existing
+      the_category = nil
+      if category
+        the_category = Saruman::Category.first_or_create(name: category)
+      end
+
       # Actually populating the database with
       # a new Link
       Saruman::Link.create(title:    title || "",
                            url:      url,
                            added_at: added_at || DateTime.now,
-                           tags:     the_tags)
+                           tags:     the_tags,
+                           category: the_category)
       end
   end
 
@@ -106,6 +116,27 @@ module Saruman
 
     belongs_to :tag,  :key => true
     belongs_to :link, :key => true
+  end
+
+  # Category Links can have
+  class Category
+    include DataMapper::Resource
+
+    property :id,          Serial
+    property :name,        String, :required => true
+    property :description, Text
+
+    has n, :categorizations
+    has n, :links, :through => :categorizations
+
+
+  end
+
+  class Categorization
+    include DataMapper::Resource
+
+    belongs_to :category, :key => true
+    belongs_to :link,     :key => true
   end
 
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

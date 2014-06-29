@@ -1,18 +1,18 @@
-/ Layout for a page of a single Tag
+/ Layout for a page of a single Category
 
-== slim(:navbar, locals: { page: "tag" })
+== slim(:navbar, locals: { page: "category" })
 
 .col-md.12
   .container
 
-    h1 Tag: #{tag.name}
+    h1 Category: #{category.name}
 
-    - if tag.links.empty?
-      p No Links with this Tag
+    - if category.links.empty?
+      p No Links with this Category
 
     - else
       ul.list-group
-        - tag.links.each do |link|
+        - category.links.each do |link|
           li.list-group-item
             a href="/link/#{link.id}"
               ' (Internal Link)

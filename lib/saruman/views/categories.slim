@@ -1,0 +1,19 @@
+/ Lists all categories
+
+h1.page-header Categories
+
+p Page with everything about your categories
+
+h2.sub-header All Categories
+
+p Here's a list of all categories.
+
+ul.categories.list-group
+- if @categories.empty?
+  li.list-group-item
+    | You have no categories!
+
+- else
+  - @categories.each do |the_category|
+    == slim(:single_category, locals: { category: the_category })
+

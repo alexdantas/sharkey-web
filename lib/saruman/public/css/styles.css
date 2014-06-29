@@ -112,7 +112,8 @@ body {
 	background-color: blue;
 }
 .link-internal-link,
-.tag-internal-link    {
+.tag-internal-link,
+.category-internal-link {
 	margin-right: 15px;
 }
 
