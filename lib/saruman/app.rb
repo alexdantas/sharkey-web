@@ -152,7 +152,9 @@ module Saruman
                                 params[:added_at],
                                 params[:tags],
                                 params[:category])
-      redirect back
+
+      # If AJAX request, don't redirect anywhere!
+      redirect back unless request.xhr?
     end
 
     post '/links' do
@@ -165,8 +167,25 @@ module Saruman
                                   params[:tags],
                                   params[:category])
       end
+      redirect back unless request.xhr?
+    end
 
-      redirect back
+    post '/category' do
+      new_category = Saruman::Category.first_or_create(name: params[:name]);
+
+      parent_category = Saruman::Category.get(params[:parent])
+      # Silently fail if invalid ID was given
+      if (parent_category)
+        parent_category.add_child(new_category)
+      end
+
+      # If this is an AJAX request, we'll return a JSON
+      # string with information on the recently-added Category
+      if request.xhr?
+        return "{ \"id\": \"#{new_category.id}\", \"name\": \"#{new_category.name}\" }"
+      else
+        redirect back
+      end
     end
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

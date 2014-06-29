@@ -105,7 +105,7 @@
                 label.col-sm-2.control-label for="input-link-category"
                   | Category
                 .col-sm-10
-                  select.form-control id="input-link-category" name="category" placeholder="Category"
+                  select.form-control#input-link-category name="category" placeholder="Category"
                     ruby:
                       # This magic function shows all Categories in
                       # hierarchical order. Just like:
@@ -135,6 +135,30 @@
                       end
 
                     == select_options
+
+                .col-sm-offset-2.col-sm-10
+                  button.btn.btn-default#new-category
+                    span> class="glyphicon glyphicon-fire"
+                    | New Category
+
+            form.form-horizontal#new-category-form role="form" action="/category" method="POST"
+              .form-group
+
+                label.col-sm-2.control-label for="new-category-name"
+                  | Name
+                .col-sm-10
+                  input.form-control#new-category-name type="text"  name="name" placeholder="New category name" required="true" autofocus="true"
+
+                label.col-sm-2.control-label for="new-category-parent"
+                  | Parent
+                .col-sm-10
+                  select.form-control#new-category-parent name="parent" placeholder="Parent"
+                    == select_options
+
+                  button.btn.btn-default#new-category-button type="submit"
+                    span> class="glyphicon glyphicon-fire"
+                    | New Category
+
 
           .tab-pane#multiple-links
             / Form that creates several Links
