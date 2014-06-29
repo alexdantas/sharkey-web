@@ -96,37 +96,56 @@ h2.sub-header#data Data
 
 h2.sub-header#erase-stuff Erase Stuff
 
+p
+  | All these options are highly destructive.
+    There's no way to get your data back once they're gone!
+
 .row.setting
   .col-md-12
     h4 Erase all Links
 .row
   .col-md-8
-    p.help-block Deletes all links, keeping Tags and every other information.
+    p.help-block Deletes all links, keeping Tags, Categories and every other information.
 
   .col-md-4
     form role="form" action="/all-links" method="POST"
       input type="hidden" name="_method" value="DELETE"
 
-      button.btn.btn-xs.btn-warning type="submit" title="Delete All Links"
+      button.btn.btn-xs.btn-warning type="submit" title="Exterminate Links"
         span.glyphicon.glyphicon-trash
         '
-        | Delete All Links
+        | Exterminate Links
 
 .row.setting
   .col-md-12
     h4 Erase all Tags
 .row
   .col-md-8
-    p.help-block Deletes all tags, keeping their Links and every other information.
+    p.help-block Deletes all tags, keeping every other information.
 
   .col-md-4
     form role="form" action="/all-tags" method="POST"
       input type="hidden" name="_method" value="DELETE"
 
-      button.btn.btn-xs.btn-warning type="submit" title="Delete All Links"
+      button.btn.btn-xs.btn-warning type="submit" title="Exterminate Tags"
         span.glyphicon.glyphicon-trash
         '
-        | Delete All Tags
+        | Exterminate Tags
+
+.row.setting
+  .col-md-12
+    h4 Erase all Categories
+.row
+  .col-md-8
+    p.help-block Deletes all categories, but not their links.
+
+  .col-md-4
+    form role="form" action="/all-categories" method="POST"
+      input type="hidden" name="_method" value="DELETE"
+
+      button.btn.btn-xs.btn-warning type="submit" title="Exterminate Categories"
+        span> class="glyphicon glyphicon-trash"
+        | Exterminate Categories
 
 
 .row.setting
@@ -134,15 +153,14 @@ h2.sub-header#erase-stuff Erase Stuff
     h4 Erase Everything
 .row
   .col-md-8
-    p.help-block Deletes everything - tags, links...
+    p.help-block Deletes everything - Tags, Links, Categories... Watch out!
 
   .col-md-4
     form role="form" action="/everything" method="POST"
       input type="hidden" name="_method" value="DELETE"
 
 
-      button.btn.btn-xs.btn-warning type="submit" title="Delete All Links"
-        span.glyphicon.glyphicon-trash
-        '
-        | Delete Everything
+      button.btn.btn-xs.btn-danger type="submit" title="Delete Everything"
+        span> class="glyphicon glyphicon-trash"
+        | Destroy all Stuff
 

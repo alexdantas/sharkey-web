@@ -100,6 +100,8 @@ module Saruman
 
     delete '/all-categories' do
       Saruman::Categorization.destroy
+      Saruman::CategoryParent.destroy
+      Saruman::CategoryChild.destroy
       Saruman::Category.destroy
       redirect to '/'
     end
@@ -109,6 +111,8 @@ module Saruman
       Saruman::Link.destroy
       Saruman::Tag.destroy
       Saruman::Categorization.destroy
+      Saruman::CategoryParent.destroy
+      Saruman::CategoryChild.destroy
       Saruman::Category.destroy
       redirect to '/'
     end
