@@ -105,7 +105,36 @@
                 label.col-sm-2.control-label for="input-link-category"
                   | Category
                 .col-sm-10
-                  input.form-control type="text" id="input-link-category" name="category" placeholder="Category"
+                  select.form-control id="input-link-category" name="category" placeholder="Category"
+                    ruby:
+                      # This magic function shows all Categories in
+                      # hierarchical order. Just like:
+                      #
+                      # parent
+                      # - child
+                      # - other_child
+                      # - - other_other_child
+                      # other_parent
+                      # - another_child
+
+                      def select_options
+                        $output = ""
+
+                        def recursive_childs(count, category)
+                          $output << "<option value='#{category.id}'>#{'- ' * count}#{category.name}</option>"
+
+                          category.childs.each do |child|
+                            recursive_childs(count + 1, child)
+                          end
+                        end
+
+                        Saruman::Category.orphans.each do |orphan|
+                          recursive_childs(0, orphan)
+                        end
+                        return $output
+                      end
+
+                    == select_options
 
           .tab-pane#multiple-links
             / Form that creates several Links
