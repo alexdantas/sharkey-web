@@ -15,9 +15,10 @@ html
       saruman link: the best thing since Delicious
       .
 
-    title Hello, Sinatra!
+    title Saruman Link
 
-    link rel="stylesheet" media="screen, projection" href="/css/bootstrap.css"
+    link rel="stylesheet" media="screen, projection" href="/themes/#{Saruman::Setting['theme']}/style.css"
+
     - if Saruman::Setting['loading_bar'] == 'true'
       link rel="stylesheet" href="/css/nprogress.css"
 

@@ -230,14 +230,32 @@ module Saruman
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     # Misc. pages
 
+    post '/debug' do
+      slim("#{params.inspect}")
+    end
+
     post '/setting' do
+      # HACK
+      # BIG EXCEPTION are <select> elements, who fuck up
+      # the entire standard
+      if (params[:theme])
+        Saruman::Setting['theme'] = params[:theme]
+        Saruman::Setting.save
+        redirect back
+      end
+
       # Error for non-existing setting
       return 500 unless Saruman::Setting[params[:name]]
       return 500 unless params[:value]
 
       Saruman::Setting[params[:name]] = params[:value]
       Saruman::Setting.save
-      200
+
+      if request.xhr?
+        return 200
+      else
+        redirect back
+      end
     end
 
     # Import Saruman::Links from Bookmark HTML files

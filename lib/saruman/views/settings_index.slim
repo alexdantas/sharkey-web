@@ -10,6 +10,32 @@ h2.sub-header#appearance Appearance
 
 .row.setting
   .col-md-12
+    h4 Theme
+.row
+  .col-md-8
+    p.help-block
+      | Change how it looks!
+    p.help-block
+      | Courtesy of
+      a< href="http://bootswatch.com/" Bootswatch.
+
+  .col-md-4
+    form#theme-form role="form" action="/setting" method="POST"
+      .form-group
+        select.form-control#theme-select name="theme" placeholder="Theme"
+          - Dir.entries(File.expand_path('./lib/saruman/public/themes')).sort.each do |dir|
+            - if (dir != 'fonts') and (dir[0] != '.')
+              - if dir == Saruman::Setting['theme']
+                option value="#{dir}" selected="true" = dir
+              - else
+                option value="#{dir}" = dir
+
+        button.btn.btn-primary type="submit" title="Apply"
+          span> class="glyphicon glyphicon-trash"
+          | Apply
+
+.row.setting
+  .col-md-12
     h4 Date format
 .row
   .col-md-8
@@ -80,7 +106,7 @@ h2.sub-header#data Data
   .col-md-4
     form role="form" action="/import" method="POST" enctype="multipart/form-data"
       input type="file" name="file"
-      button.btn.btn-xs.btn-default type="submit" title="Import"
+      button.btn.btn-primary type="submit" title="Import"
         span.glyphicon.glyphicon-trash
         '
         | Import
@@ -111,7 +137,7 @@ p
     form role="form" action="/all-links" method="POST"
       input type="hidden" name="_method" value="DELETE"
 
-      button.btn.btn-xs.btn-warning type="submit" title="Exterminate Links"
+      button.btn.btn-sm.btn-warning type="submit" title="Exterminate Links"
         span.glyphicon.glyphicon-trash
         '
         | Exterminate Links
@@ -127,7 +153,7 @@ p
     form role="form" action="/all-tags" method="POST"
       input type="hidden" name="_method" value="DELETE"
 
-      button.btn.btn-xs.btn-warning type="submit" title="Exterminate Tags"
+      button.btn.btn-sm.btn-warning type="submit" title="Exterminate Tags"
         span.glyphicon.glyphicon-trash
         '
         | Exterminate Tags
@@ -143,7 +169,7 @@ p
     form role="form" action="/all-categories" method="POST"
       input type="hidden" name="_method" value="DELETE"
 
-      button.btn.btn-xs.btn-warning type="submit" title="Exterminate Categories"
+      button.btn.btn-sm.btn-warning type="submit" title="Exterminate Categories"
         span> class="glyphicon glyphicon-trash"
         | Exterminate Categories
 
@@ -160,7 +186,7 @@ p
       input type="hidden" name="_method" value="DELETE"
 
 
-      button.btn.btn-xs.btn-danger type="submit" title="Delete Everything"
+      button.btn.btn-sm.btn-danger type="submit" title="Delete Everything"
         span> class="glyphicon glyphicon-trash"
         | Destroy all Stuff
 

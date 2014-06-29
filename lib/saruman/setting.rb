@@ -34,6 +34,12 @@ module Saruman
 
       if File.exist? SETTING_FILE
         @values = YAML::load_file SETTING_FILE
+
+        # Strange error that sometimes appear
+        # (@values becomes `false`)
+        if not @values.class == Hash
+          self.reset
+        end
       end
       self.save
     end
