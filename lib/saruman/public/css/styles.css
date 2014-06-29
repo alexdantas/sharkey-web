@@ -108,9 +108,16 @@ body {
 .link-tag {
 	margin-left: 5px;
 }
-.link-tag span:hover {
-	background-color: blue;
+
+.link-tag      span:hover,
+.link-category span:hover {
+	background-color: #428bca;
 }
+.link-tag      a:hover,
+.link-category a:hover {
+	text-decoration: none;
+}
+
 .link-internal-link,
 .tag-internal-link,
 .category-internal-link {

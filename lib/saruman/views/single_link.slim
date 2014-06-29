@@ -17,11 +17,17 @@ li.link.list-group-item.hoverable-parent.ajax-delete-parent
         - else
           a href="#{link.url}" = link.title
 
+      .link-category
+        - if link.category
+          a.link-category href="/category/#{link.category.id}" title="#{link.category.name}"
+            span.label.label-default = link.category.name
+
       .link-tags
         - if link.tags
           - link.tags.each do |tag|
             a.link-tag href="/tag/#{tag.id}" title="#{tag.name}"
               span.badge = tag.name
+
     .col-md-4.hoverable-children
       form action="/link/#{link.id}" method="POST"
         .form-group
