@@ -55,7 +55,7 @@ module Saruman
     #       This function differs from it on the sense that
     #       it also creates the Tags related to this Link
     #
-    # @param tags     String with comma-separated values
+    # @param tags     Array of Strings as tag names
     # @param added_at DateTime object or `nil` for DateTime.now
     # @param category An ID of _existing_ category
     #
@@ -66,11 +66,7 @@ module Saruman
       # This array will contain the Tags objects
       # created here
       the_tags = []
-
-      tags.split(',').each do |tag|
-
-        # Skipping if got a "string,like,,this,with,,,empty,colons,,,"
-        next if tag.nil?
+      tags.each do |tag|
 
         # If Saruman::Tag exists, return it.
         # Otherwise, create it
