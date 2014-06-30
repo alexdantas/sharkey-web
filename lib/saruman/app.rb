@@ -210,6 +210,14 @@ module Saruman
       # (visible inside all Views)
       @tags = Saruman::Tag.all
 
+      # If request is AJAX, return a JSON
+      # array with all existing tags
+      if request.xhr?
+        return @tags.to_json
+      end
+
+      # Else, let's go to the page!
+
       slim(:tags,
            :layout => :dashboard,
            :locals => { page: "tags" })
