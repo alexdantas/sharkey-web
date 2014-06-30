@@ -33,7 +33,15 @@ module Saruman
       self.reset
 
       if File.exist? SETTING_FILE
-        @values = YAML::load_file SETTING_FILE
+
+        # Sometimes on the _development_ environment
+        # the settings file gets corrupted...
+        # Well, that's a shame!
+        begin
+          @values = YAML::load_file SETTING_FILE
+        rescue
+          self.reset
+        end
 
         # Strange error that sometimes appear
         # (@values becomes `false`)
