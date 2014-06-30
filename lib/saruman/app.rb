@@ -19,6 +19,8 @@ require 'saruman/models'
 require 'saruman/setting'
 require 'saruman/importerexporter'
 
+require 'json'
+
 module Saruman
   class App < Sinatra::Application
 
@@ -210,13 +212,14 @@ module Saruman
       # (visible inside all Views)
       @tags = Saruman::Tag.all
 
+      # MagicSuggest, the jQuery plugin, uses this to give
+      # suggestions on Tag input fields.
+      #
       # If request is AJAX, return a JSON
       # array with all existing tags
       if request.xhr?
-        return @tags.to_json
+        return @tags.sort.to_json
       end
-
-      # Else, let's go to the page!
 
       slim(:tags,
            :layout => :dashboard,
