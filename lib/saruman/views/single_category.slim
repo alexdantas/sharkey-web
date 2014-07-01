@@ -6,11 +6,11 @@
 
 li.folder.list-group-item.nolink
 
-  | dsa
-  | coisa
-  | 1uma
-  / .category.hoverable-parent.ajax-delete-parent
-  a href="/category/#{category.id}" = category.name
+  / This span is for FancyTree to allow
+    inserting arbitrary HTML on items
+  span
+    / .category.hoverable-parent.ajax-delete-parent
+    a href="/category/#{category.id}" = category.name
 
   - if not category.childs.empty?
     / Recursively showing children inside their parents
@@ -19,29 +19,37 @@ li.folder.list-group-item.nolink
         == slim(:single_category, locals: { category: child })
 
   - if not category.links.empty?
-    - category.links.each do |link|
-      li.list-group-item
-        / a.link-internal-link href="/link/#{link.id}"
-        /   span.label.label-primary
-        /     span.glyphicon.glyphicon-link
+    ul
+      - category.links.each do |link|
+        li.list-group-item
+          span
+            / This empty <a> tag is for FancyTree to redirect
+              to it when pressing ENTER or SPACE.
+              That's because it redirects to the FIRST link
+              it finds.
+              So if you want to redirect to the EXTERNAL link
+              just delete this
+            a.link-internal-link href="/link/#{link.id}"
 
-        - if link.title.empty?
-          a href="#{link.url}" = link.url
-        - else
-          a href="#{link.url}" = link.title
+            - if link.title.empty?
+              a href="#{link.url}" = link.url
+            - else
+              a href="#{link.url}" = link.title
 
 
 
-  / .col-md-4.hoverable-children
-  /   .pull-right
-  /     form.category-delete action="/category/#{category.id}" method="POST"
-  /       .form-group
-  /         /
-  /           Most browsers don't recognize the DELETE
-  /           HTTP method, so this is a fake for Sinatra
-  /           to recognize it as DELETE anyway
-  /         input type="hidden" name="_method" value="DELETE"
-  /         button.ajax-delete.btn.btn-xs.btn-default type="submit" title="Delete Category"
-  /           span> class="glyphicon glyphicon-trash"
-  /           | Destroy
+
+
+    / .col-md-4.hoverable-children
+    /   .pull-right
+    /     form.category-delete action="/category/#{category.id}" method="POST"
+    /       .form-group
+    /         /
+    /           Most browsers don't recognize the DELETE
+    /           HTTP method, so this is a fake for Sinatra
+    /           to recognize it as DELETE anyway
+    /         input type="hidden" name="_method" value="DELETE"
+    /         button.ajax-delete.btn.btn-xs.btn-default type="submit" title="Delete Category"
+    /           span> class="glyphicon glyphicon-trash"
+    /           | Destroy
 

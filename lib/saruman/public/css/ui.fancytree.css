@@ -17,10 +17,19 @@ ul.fancytree-container {
   white-space: nowrap;
   padding: 3px;
   margin: 0;
+
   overflow: auto;
+
+
   min-height: 0%;
   position: relative;
 }
+
+ul.fancytree-container:focus {
+	/* AVOID THAT UGLY BLUE OUTLINE ON CHROME */
+	outline: none;
+}
+
 ul.fancytree-container ul {
   padding: 0 0 0 16px;
   margin: 0;

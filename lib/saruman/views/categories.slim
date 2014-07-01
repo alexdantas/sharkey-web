@@ -4,9 +4,23 @@ h1.page-header Categories
 
 p Page with everything about your categories
 
-h2.sub-header All Categories
+h2.sub-header Category list
 
-p Here's a list of all categories.
+p.help-block
+  | Navigate with your keyboard (arrow keys, enter, space, backspace, + and -)
+
+/ Controller for actions on the categories list
+ul.pagination
+  li#categories-expand
+    a href="#"
+      span.glyphicon.glyphicon-resize-full
+      '
+      | Expand all
+  li#categories-collapse
+    a href="#"
+      span.glyphicon.glyphicon-resize-small
+      '
+      | Collapse all
 
 #categories
   ul.list-group
@@ -17,4 +31,12 @@ p Here's a list of all categories.
     - else
       - @categories.each do |the_category|
         == slim(:single_category, locals: { category: the_category })
+
+
+
+/ When the page loads, focus on the categories browser
+javascript:
+  ($(function(){
+    $('#categories .fancytree-container').focus();
+  }));
 
