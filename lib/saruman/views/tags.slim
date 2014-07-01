@@ -17,27 +17,50 @@ h2.sub-header Tag list
     | Navigate with your keyboard (arrow keys, enter, space, backspace, + and -)
 
   / Controller for actions on the tag list
-  ul.pagination
-    li#tags-expand
-      a href="#"
-        span.glyphicon.glyphicon-resize-full
-        '
-        | Expand all
-    li#tags-collapse
-      a href="#"
-        span.glyphicon.glyphicon-resize-small
-        '
-        | Collapse all
+  #tags-buttons
+    ul.pagination
+      li#tags-expand
+        a href="#"
+          span.glyphicon.glyphicon-resize-full
+          '
+          | Expand all
+      li#tags-collapse
+        a href="#"
+          span.glyphicon.glyphicon-resize-small
+          '
+          | Collapse all
+      li#tags-edit
+        a href="#"
+          span.glyphicon.glyphicon-pencil
+          '
+          | Edit
+      li#tags-select-all
+        a href="#"
+          span.glyphicon.glyphicon-check
+          '
+          | Select all
+      li#tags-select-none
+        a href="#"
+          span.glyphicon.glyphicon-unchecked
+          '
+          | Select none
+      li#tags-select-toggle
+        a href="#"
+          span.glyphicon.glyphicon-share
+          '
+          | Toggle selection
+      li#tags-delete
+        a href="#"
+          span.glyphicon.glyphicon-remove
+          '
+          | Delete selected
 
   #tags
     ul.list-group
       - @tags.each do |the_tag|
         == slim(:single_tag, locals: { tag: the_tag })
 
-  / When the page loads, focus on the tags browser
-  javascript:
-    ($(function(){
-      $('#tags .fancytree-container').focus();
-    }));
-
+  / This page's specific scripts
+  script src="/js/ajaxmanager.js"
+  script src="/js/page-tags.js"
 

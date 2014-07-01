@@ -34,8 +34,6 @@ h2.sub-header Category list
       - @categories.each do |the_category|
         == slim(:single_category, locals: { category: the_category })
 
-
-
   / When the page loads, focus on the categories browser
   javascript:
     ($(function(){
