@@ -26,8 +26,8 @@ module Saruman
         title = link.text
         url   = link.attributes['href'].value
         tags  = if   link.attributes['tags']
-                then link.attributes['tags'].value
-                else ""
+                then link.attributes['tags'].value.split(',')
+                else []
                 end
 
         # Some links have the date when added (UNIX Timestamp)
