@@ -34,7 +34,50 @@ module Saruman
     # Helper functions that are accessible inside
     # every place
     helpers do
-      # Nothing for now...
+      def delete_link id
+        link = Saruman::Link.get id
+        return if not link
+
+        # Before deleting the link, we must remove
+        # all Saruman::Tag associations
+        link.taggings.destroy       if link.taggings
+        link.categorization.destroy if link.categorization
+        link.destroy
+      end
+
+      def delete_tag id
+        tag = Saruman::Tag.get id
+        return if not tag
+
+        tag.taggings.destroy if tag.taggings
+        tag.destroy
+      end
+
+      def delete_category id
+        category = Saruman::Category.get id
+        return if not category
+
+        # * `category.parent` is a pointer to
+        #   another Category
+        # * `category.categoryParent` is a pointer
+        #   to the RELATIONSHIP to another Category
+
+        # Removing ties to other Categories...
+        if category.parent
+          category.parent.remove_child(category)
+        end
+
+        if not category.childs.empty?
+          category.childs.each { |child| category.remove_child(child) }
+        end
+
+        # ...and to other Links...
+        category.categorizations.destroy if category.categorizations
+
+        # ...and finally to itself
+        category.destroy
+      end
+
     end
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -56,12 +99,7 @@ module Saruman
     # Deleting stuff
 
     delete '/link/:id' do
-      the_link = Saruman::Link.get(params[:id])
-
-      # Before deleting the link, we must remove
-      # all Saruman::Tag associations
-      the_link.taggings.destroy
-      the_link.destroy
+      delete_link(params[:id])
 
       # If this is an AJAX request, we don't need
       # to redirect anywhere!
@@ -70,13 +108,21 @@ module Saruman
       redirect back unless request.xhr?
     end
 
+    # Extra parameters:
+    #
+    # - destroy_links If should also destroy links with this tag
+    #
     delete '/tag/:id' do
-      the_tag = Saruman::Tag.get(params[:id])
 
-      # Before deleting the tag, we must remove
-      # all Saruman::Tag associations
-      the_tag.taggings.destroy
-      the_tag.destroy
+      # Welp, here we go!
+      # Send a DELETE request for each link
+      if (params[:destroy_links])
+        links = Saruman::Link.by_tag(params[:id])
+
+        links.each { |link| delete_link link.id }
+      end
+
+      delete_tag params[:id]
 
       # If this is an AJAX request, we don't need
       # to redirect anywhere!

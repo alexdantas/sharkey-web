@@ -81,6 +81,20 @@ module Saruman
                            tags:     the_tags,
                            category: Saruman::Category.get(category))
       end
+
+    # Returns all Links that have a Tag with `tag_id`
+    def self.by_tag(tag_id)
+
+      # RANT: I don't know why I couldn't simply do something like
+      #       `Saruman::Link.all(:tag => Saruman::Tag.get(tag_id))`
+      #       it seems so strange!
+      #       DataMapper's docs imply that we actually _can_,
+      #       so why...?
+
+      taggings = Saruman::Tagging.all(:tag_id => tag_id)
+
+      Saruman::Link.all(:taggings => taggings)
+    end
   end
 
   # Single textual tag Links can have
@@ -146,11 +160,13 @@ module Saruman
       self
     end
 
+    # Removes the parent/children relationship
+    # @note Does not remove any Categories!
     def remove_child child
       throw 'Removing self as child' if child == self
 
-      self.childs.delete(child)
-      child.parent = nil
+      self.categoryChilds.all(target_id: child.id).destroy
+      child.categoryParent.all(source_id: self.id).destroy
 
       self.reload
       self
