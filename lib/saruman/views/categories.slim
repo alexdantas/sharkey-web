@@ -6,37 +6,39 @@ p Page with everything about your categories
 
 h2.sub-header Category list
 
-p.help-block
-  | Navigate with your keyboard (arrow keys, enter, space, backspace, + and -)
+- if @categories.empty?
 
-/ Controller for actions on the categories list
-ul.pagination
-  li#categories-expand
-    a href="#"
-      span.glyphicon.glyphicon-resize-full
-      '
-      | Expand all
-  li#categories-collapse
-    a href="#"
-      span.glyphicon.glyphicon-resize-small
-      '
-      | Collapse all
+  .alert.alert-info
+    | You have no categories!
 
-#categories
-  ul.list-group
-    - if @categories.empty?
-      li
-        | You have no categories!
+- else
 
-    - else
+  p.help-block
+    | Navigate with your keyboard (arrow keys, enter, space, backspace, + and -)
+
+  / Controller for actions on the categories list
+  ul.pagination
+    li#categories-expand
+      a href="#"
+        span.glyphicon.glyphicon-resize-full
+        '
+        | Expand all
+    li#categories-collapse
+      a href="#"
+        span.glyphicon.glyphicon-resize-small
+        '
+        | Collapse all
+
+  #categories
+    ul.list-group
       - @categories.each do |the_category|
         == slim(:single_category, locals: { category: the_category })
 
 
 
-/ When the page loads, focus on the categories browser
-javascript:
-  ($(function(){
-    $('#categories .fancytree-container').focus();
-  }));
+  / When the page loads, focus on the categories browser
+  javascript:
+    ($(function(){
+      $('#categories .fancytree-container').focus();
+    }));
 
