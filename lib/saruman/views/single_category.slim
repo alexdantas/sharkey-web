@@ -4,49 +4,44 @@
   list
   Local variable: category
 
-li.category.list-group-item.hoverable-parent.ajax-delete-parent
-  .row
-    .col-md-8
-      .category-title
-        a.category-internal-link href="/category/#{category.id}"
-          span.label.label-primary
-            span.glyphicon.glyphicon-book
+li.folder.list-group-item.nolink
 
-        a href="/category/#{category.id}" = category.name
+  | dsa
+  | coisa
+  | 1uma
+  / .category.hoverable-parent.ajax-delete-parent
+  a href="/category/#{category.id}" = category.name
 
-    .col-md-4.hoverable-children
-      .pull-right
-        form.category-delete action="/category/#{category.id}" method="POST"
-          .form-group
-            /
-              Most browsers don't recognize the DELETE
-              HTTP method, so this is a fake for Sinatra
-              to recognize it as DELETE anyway
-            input type="hidden" name="_method" value="DELETE"
-            button.ajax-delete.btn.btn-xs.btn-default type="submit" title="Delete Category"
-              span> class="glyphicon glyphicon-trash"
-              | Destroy
+  - if not category.childs.empty?
+    / Recursively showing children inside their parents
+    ul
+      - category.childs.each do |child|
+        == slim(:single_category, locals: { category: child })
 
-  .row
-    .col-md-12
-      / Recursively showing children inside their parents
-      - if not category.childs.empty?
-        ul.categories.list-group
-          - category.childs.each do |child|
-            == slim(:single_category, locals: { category: child })
+  - if not category.links.empty?
+    - category.links.each do |link|
+      li.list-group-item
+        / a.link-internal-link href="/link/#{link.id}"
+        /   span.label.label-primary
+        /     span.glyphicon.glyphicon-link
 
-      .category-links
-        - if not category.links.empty?
-          ul.list-group
-            - category.links.each do |link|
-              li.list-group-item
-                a.link-internal-link href="/link/#{link.id}"
-                  span.label.label-primary
-                    span.glyphicon.glyphicon-link
+        - if link.title.empty?
+          a href="#{link.url}" = link.url
+        - else
+          a href="#{link.url}" = link.title
 
-                - if link.title.empty?
-                  a href="#{link.url}" = link.url
-                - else
-                  a href="#{link.url}" = link.title
 
+
+  / .col-md-4.hoverable-children
+  /   .pull-right
+  /     form.category-delete action="/category/#{category.id}" method="POST"
+  /       .form-group
+  /         /
+  /           Most browsers don't recognize the DELETE
+  /           HTTP method, so this is a fake for Sinatra
+  /           to recognize it as DELETE anyway
+  /         input type="hidden" name="_method" value="DELETE"
+  /         button.ajax-delete.btn.btn-xs.btn-default type="submit" title="Delete Category"
+  /           span> class="glyphicon glyphicon-trash"
+  /           | Destroy
 

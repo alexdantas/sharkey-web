@@ -8,12 +8,13 @@ h2.sub-header All Categories
 
 p Here's a list of all categories.
 
-ul.categories.list-group
-- if @categories.empty?
-  li.list-group-item
-    | You have no categories!
+#categories
+  ul.list-group
+    - if @categories.empty?
+      li
+        | You have no categories!
 
-- else
-  - @categories.each do |the_category|
-    == slim(:single_category, locals: { category: the_category })
+    - else
+      - @categories.each do |the_category|
+        == slim(:single_category, locals: { category: the_category })
 

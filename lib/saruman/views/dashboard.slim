@@ -17,30 +17,43 @@ html
 
     title Saruman Link
 
-    / Poor Man's Theme Support
-    link rel="stylesheet" media="screen, projection" href="/themes/#{Saruman::Setting['theme']}/style.css"
+    / Bootstrap
+      (Poor Man's Theme Support)
+    link[
+      rel="stylesheet" media="screen, projection"
+      href="/themes/#{Saruman::Setting['theme']}/style.css"
+    ]
 
+    / Misc. Styles
     - if Saruman::Setting['loading_bar'] == 'true'
       link rel="stylesheet" href="/css/nprogress.css"
 
     link rel="stylesheet" href="/css/magicsuggest.css"
+    link rel="stylesheet" href="/css/ui.fancytree.css"
 
+    / Custom Styles
     link rel="stylesheet" media="screen, projection" href="/css/styles.css"
 
     /[if lt IE 9]
       script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"
 
+    / jQuery
     script src="/js/jquery-1.9.1.min.js"
+    script src="/js/jquery-ui.js"
+    / jQuery plugins
     script src="/js/jquery.tagcloud.js"
+    script src="/js/jquery.fancytree-all.js"
 
+    / Bootstrap
     script src="/js/bootstrap.min.js"
 
+    / Misc. Scripts
     - if Saruman::Setting['loading_bar'] == 'true'
       script src="/js/nprogress.js"
 
     script src="/js/mousetrap.min.js"
     script src="/js/magicsuggest.js"
-
+    / Custom Scripts
     script src="/js/scripts.js"
 
   body
