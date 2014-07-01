@@ -4,16 +4,40 @@ h1.page-header Tags
 
 p Page with everything about your tags
 
-h2.sub-header All Tags
+h2.sub-header Tag list
 
-p Here's a list of all tags.
-
-ul.tags.list-group
 - if @tags.empty?
-  li.list-group-item
+
+  .alert.alert-info
     | You have no tags!
 
 - else
-  - @tags.each do |the_tag|
-    == slim(:single_tag, locals: { tag: the_tag })
+
+  p.help-block
+    | Navigate with your keyboard (arrow keys, enter, space, backspace, + and -)
+
+  / Controller for actions on the tag list
+  ul.pagination
+    li#tags-expand
+      a href="#"
+        span.glyphicon.glyphicon-resize-full
+        '
+        | Expand all
+    li#tags-collapse
+      a href="#"
+        span.glyphicon.glyphicon-resize-small
+        '
+        | Collapse all
+
+  #tags
+    ul.list-group
+      - @tags.each do |the_tag|
+        == slim(:single_tag, locals: { tag: the_tag })
+
+  / When the page loads, focus on the tags browser
+  javascript:
+    ($(function(){
+      $('#tags .fancytree-container').focus();
+    }));
+
 

@@ -210,7 +210,7 @@ module Saruman
     get '/tags' do
       # Creating an instance variable
       # (visible inside all Views)
-      @tags = Saruman::Tag.all
+      @tags = Saruman::Tag.all.sort
 
       # MagicSuggest, the jQuery plugin, uses this to give
       # suggestions on Tag input fields.
@@ -218,7 +218,7 @@ module Saruman
       # If request is AJAX, return a JSON
       # array with all existing tags
       if request.xhr?
-        return @tags.sort.to_json
+        return @tags.to_json
       end
 
       slim(:tags,

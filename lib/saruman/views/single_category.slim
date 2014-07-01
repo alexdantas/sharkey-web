@@ -9,7 +9,6 @@ li.folder.list-group-item.nolink
   / This span is for FancyTree to allow
     inserting arbitrary HTML on items
   span
-    / .category.hoverable-parent.ajax-delete-parent
     a href="/category/#{category.id}" = category.name
 
   - if not category.childs.empty?

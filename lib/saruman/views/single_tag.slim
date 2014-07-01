@@ -4,46 +4,29 @@
   list
   Local variable: tag
 
-li.tag.list-group-item.hoverable-parent.ajax-delete-parent
-  .row
-    .col-md-8
-      .tag-title
-        a.tag-internal-link href="/tag/#{tag.id}"
-          span.label.label-primary
-            span.glyphicon.glyphicon-tag
+li.folder.list-group-item.nolink
 
-        a href="/tag/#{tag.id}" = tag.name
+  / This span is for FancyTree to allow
+    inserting arbitrary HTML on items
+  span
+    a href="/tag/#{tag.id}" = tag.name
 
-    .col-md-4.hoverable-children
-      .pull-right
-        form.tag-delete action="/tag/#{tag.id}" method="POST"
-          .form-group
-            /
-              Most browsers don't recognize the DELETE
-              HTTP method, so this is a fake for Sinatra
-              to recognize it as DELETE anyway
-            input type="hidden" name="_method" value="DELETE"
-            button.ajax-delete.btn.btn-xs.btn-default type="submit" title="Delete Tag"
-              span> class="glyphicon glyphicon-trash"
-              | Destroy
+  - if not tag.links.empty?
+    ul
+      - tag.links.each do |link|
+        li.list-group-item
+          span
+            / This empty <a> tag is for FancyTree to redirect
+              to it when pressing ENTER or SPACE.
+              That's because it redirects to the FIRST link
+              it finds.
+              So if you want to redirect to the EXTERNAL link
+              just delete this
+            a.link-internal-link href="/link/#{link.id}"
 
-  .row
-    .col-md-12
-      .tag-links
-        - if tag.links.empty?
-          p No Links with this Tag
-
-        - else
-          ul.list-group
-            - tag.links.each do |link|
-              li.list-group-item
-                a.link-internal-link href="/link/#{link.id}"
-                  span.label.label-primary
-                    span.glyphicon.glyphicon-link
-
-                - if link.title.empty?
-                  a href="#{link.url}" = link.url
-                - else
-                  a href="#{link.url}" = link.title
+            - if link.title.empty?
+              a href="#{link.url}" = link.url
+            - else
+              a href="#{link.url}" = link.title
 
 
