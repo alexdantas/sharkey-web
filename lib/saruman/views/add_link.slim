@@ -1,0 +1,148 @@
+/ The 'Add Button' dialog
+  It will only get shown when requested by a button
+
+.modal.fade#input-link tabindex="-1" role="dialog" aria-labelledby="input-link-label" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-hidden="true"
+          | &times;
+        h4.modal-title#input-link-label
+          | Summon New Link
+
+        p.random-sentence
+          | ...Because links are never enough
+
+        ul.nav.nav-pills#single-multiple-link-tab role="tablist"
+          li.active
+            a#single-link-activate href="#single-link" data-toggle="tab" Single Link
+          li
+            a#multiple-link-activate href="#multiple-links" data-toggle="tab" Multiple Links
+      .modal-body
+
+
+        .tab-content
+          .tab-pane.active#single-link
+
+            / Form that creates a Link
+            form.form-horizontal role="form" action="/link" method="POST"
+              .form-group
+                label.col-sm-2.control-label for="input-link-url"
+                  | URL
+                .col-sm-10
+                  input.form-control type="text" id="input-link-url"   name="url"   placeholder="URL"   required="true" autofocus="true"
+
+              .form-group
+                .col-sm-offset-2.col-sm-10
+                  button.btn.btn-default type="submit"
+                    span.glyphicon.glyphicon-flash
+                    '
+                    | Summon new Link
+
+              .form-group
+                label.col-sm-2.control-label for="input-link-title"
+                  | Title
+                .col-sm-10
+                  input.form-control type="text" id="input-link-title" name="title" placeholder="title"
+
+              .form-group
+                label.col-sm-2.control-label for="input-link-tags"
+                  | Tags
+                .col-sm-10
+                  input.form-control.tagsinput#input-link-tags type="text" name="tags" placeholder="tag (comma-separated)"
+
+              .form-group
+                label.col-sm-2.control-label for="input-link-category-one"
+                  | Category
+                .col-sm-10
+                  select.form-control#input-link-category-one name="category" placeholder="Category"
+                    ruby:
+                      # This magic function shows all Categories in
+                      # hierarchical order. Just like:
+                      #
+                      # parent
+                      # - child
+                      # - other_child
+                      # - - other_other_child
+                      # other_parent
+                      # - another_child
+
+                      def select_options
+                        $output = "<option value=''>(none)</option>"
+
+                        def recursive_childs(count, category)
+                          $output << "<option value='#{category.id}'>#{'- ' * count}#{category.name}</option>"
+
+                          category.childs.each do |child|
+                            recursive_childs(count + 1, child)
+                          end
+                        end
+
+                        Saruman::Category.orphans.each do |orphan|
+                          recursive_childs(0, orphan)
+                        end
+                        return $output
+                      end
+
+                    == select_options
+
+                .col-sm-offset-2.col-sm-10
+                  button.btn.btn-default#new-category
+                    span> class="glyphicon glyphicon-book"
+                    | New Category
+
+            form.form-horizontal#new-category-form role="form" action="/category" method="POST"
+              .form-group
+
+                label.col-sm-2.control-label for="new-category-name"
+                  | Name
+                .col-sm-10
+                  input.form-control#new-category-name type="text"  name="name" placeholder="New category name" required="true" autofocus="true"
+
+                label.col-sm-2.control-label for="new-category-parent"
+                  | Parent
+                .col-sm-10
+                  select.form-control#new-category-parent name="parent" placeholder="Parent"
+                    == select_options
+
+                  button.btn.btn-default#new-category-button type="submit"
+                    span> class="glyphicon glyphicon-book"
+                    | Create Category
+
+
+          .tab-pane#multiple-links
+            / Form that creates several Links
+            form.form-horizontal role="form" action="/links" method="POST"
+              .form-group
+                label.col-sm-2.control-label for="input-links-url"
+                  | URLs (one per line)
+                .col-sm-10
+                  textarea.form-control type="textarea" rows="6" id="input-links-url" name="url" placeholder="URLs" required="true" autofocus="true"
+
+              .form-group
+                .col-sm-offset-2.col-sm-10
+                  button.btn.btn-default type="submit"
+                    span.glyphicon.glyphicon-flash
+                    '
+                    | Summon new Links
+
+              .form-group
+                label.col-sm-2.control-label for="input-link-tags"
+                  | Tags
+                .col-sm-10
+                  input.form-control.tagsinput type="text" id="input-link-tags" name="tags" placeholder="tag (comma-separated)"
+
+              .form-group
+                label.col-sm-2.control-label for="input-link-category-two"
+                  | Category
+                .col-sm-10
+                  select.form-control#input-link-category-two name="category" placeholder="Category"
+                    == select_options
+
+      / If you ever want to add a footer some day,
+        just uncomment these two lines
+        .modal-footer
+
+script src="/js/lib/magicsuggest.js"
+script src="/js/page-add-link.js"
+
