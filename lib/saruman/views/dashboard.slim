@@ -75,6 +75,10 @@ html
                 span> class="glyphicon glyphicon-link"
                 | Links
                 span.badge.pull-right = Saruman::Link.all.size
+            li
+              a href="/random"
+                span> class="glyphicon glyphicon-random"
+                | Random Link
 
           ul.nav.nav-sidebar
             li class="#{ if page == 'tags' then 'active' end }"

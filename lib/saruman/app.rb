@@ -374,6 +374,15 @@ module Saruman
            :locals => { page: "tagcloud" })
     end
 
+    # Surprise me!
+    get '/random' do
+      the_link = Saruman::Link.all.sample
+
+      slim(:link,
+           :layout => :dashboard,
+           locals: { page: "link", link: the_link })
+    end
+
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     # Error-handling
 
