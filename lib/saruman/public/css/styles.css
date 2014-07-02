@@ -105,7 +105,7 @@ li.link .row {
 li.link .row:nth-child(4) {
 	margin-top: 10px;
 }
-span.link-title, span.tag-title {
+span.link-title {
 	font-size   : 130%;
 	font-weight : bold;
 	float       : left;
@@ -157,9 +157,7 @@ span.link-visited {
 	text-decoration: none;
 }
 
-span.link-internal-link,
-.tag-internal-link,
-.category-internal-link {
+span.link-internal-link {
 	margin: 0 10px;
 	float: left;
 }
