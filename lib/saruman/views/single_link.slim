@@ -4,7 +4,7 @@
   list
   Local variable: link
 
-li.link.list-group-item.hoverable-parent.ajax-delete-parent
+li.link.list-group-item.hoverable-parent.ajax-delete-parent data-link-id="#{link.id}"
   .row
     span.link-title
       - if link.title.empty?
@@ -44,7 +44,10 @@ li.link.list-group-item.hoverable-parent.ajax-delete-parent
 
     /span.asdasdcol-md-4.hoverable-children
     span.link-controls
-      button.btn.btn-xs.btn-primary title="Edit Link"
+      button.btn.btn-xs.btn-primary.link-favorite title="Favorite"
+        span class="glyphicon glyphicon-star#{if not link.favorite then '-empty' end}"
+
+      button.btn.btn-xs.btn-primary.link-edit title="Edit Link"
         span.glyphicon.glyphicon-pencil
 
       form action="/link/#{link.id}" method="POST"

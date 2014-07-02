@@ -319,6 +319,14 @@ module Saruman
            :locals => { page: "categories" })
     end
 
+    get '/favorites' do
+      @links = Saruman::Link.all(favorite: true)
+
+      slim(:links,
+           :layout => :dashboard,
+           :locals => { page: "favorites" })
+    end
+
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     # Misc. pages
 
@@ -383,6 +391,17 @@ module Saruman
       slim(:link,
            :layout => :dashboard,
            locals: { page: "link", link: the_link })
+    end
+
+    # Toggles the favorite state of the Link with :id
+    #
+    # Returns the item's favorite state _after_ the change.
+    post '/favorite/:id' do
+      the_link = Saruman::Link.get(params[:id])
+      return 502 if not the_link
+
+      the_link.toggle_favorite
+      return "{ \"isFavorite\": #{the_link.favorite} }"
     end
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

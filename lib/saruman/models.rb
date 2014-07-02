@@ -42,6 +42,7 @@ module Saruman
     property :title,    String                    # User-specified title
     property :added_at, DateTime                  # When this link was added
     property :comment,  Text
+    property :favorite, Boolean, :default => false
 
     has n, :taggings
     has n, :tags, :through => :taggings
@@ -120,6 +121,9 @@ module Saruman
       Saruman::Link.all(:categorization => categorizations)
     end
 
+    def toggle_favorite
+      self.update(favorite: (not self.favorite));
+    end
   end
 
   # Single textual tag Links can have

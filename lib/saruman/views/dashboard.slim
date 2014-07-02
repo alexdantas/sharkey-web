@@ -71,6 +71,12 @@ html
                 span> class="glyphicon glyphicon-link"
                 | Links
                 span.badge.pull-right = Saruman::Link.all.size
+            li class="#{ if page == 'favorites' then 'active' end }"
+              a#keybind-favorites href="/favorites"
+                span> class="glyphicon glyphicon-star"
+                | Favorites
+                span.badge.pull-right = Saruman::Link.all(favorite: true).size
+
             li
               a href="/random"
                 span> class="glyphicon glyphicon-random"
