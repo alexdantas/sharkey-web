@@ -63,20 +63,9 @@ li.link.list-group-item.hoverable-parent.ajax-delete-parent data-link-id="#{link
           br/
 
     span.link-added
-      ruby:
-        #
-        # Full date where the link was added
-        added_full = link.added_at.strftime '%H:%m %d-%m-%Y'
-        #
-        # Now we'll calculate a short, human-friendly
-        # version of the above (like '2 days, 5 hours')
-        added_secs = link.added_at.strftime('%s').to_i
-        now_secs   = DateTime.now.strftime('%s').to_i
-        #
-        added_short = ChronicDuration.output(now_secs-added_secs)
       | Added
-      a<> href="#" title="#{added_full}"
-        time = added_short
+      a<> href="#" title="#{formatted_date(link.added_at)}"
+        time = relative_date(link.added_at)
       | ago
 
   .row
@@ -84,7 +73,10 @@ li.link.list-group-item.hoverable-parent.ajax-delete-parent data-link-id="#{link
       span.link-visited-date
         - if link.visited?
           ' Last visited
-          = link.last_visit
+          a<> href="#" title="#{formatted_date(link.last_visit)}"
+            time = relative_date(link.last_visit)
+          | ago
+
       '
       span.badge.link-visited-count
         span.glyphicon.glyphicon-open

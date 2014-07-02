@@ -92,6 +92,26 @@ module Saruman
         @sentences ||= File.readlines(File.join(File.dirname(__FILE__), '/public/data/sentences.txt'))
         @sentences.sample
       end
+
+      # Converts `datetime` object into a relative date String
+      # (like "2 days, 8 hours, 15 minutes, 2 seconds")
+      def relative_date datetime
+        return '' if datetime.nil?
+
+        # Now we'll calculate a short, human-friendly
+        # version of the full date (like '2 days, 5 hours')
+        added_secs = datetime.strftime('%s').to_i
+        now_secs   = DateTime.now.strftime('%s').to_i
+
+        ChronicDuration.output(now_secs - added_secs)
+      end
+
+      # Converts `datetime` object into a formatted date String
+      def formatted_date datetime
+        return '' if datetime.nil?
+
+        datetime.strftime '%H:%m %d-%m-%Y'
+      end
     end
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

@@ -133,11 +133,10 @@ span.link-controls > form {
 span.link-description {
 	float: left;
 }
-span.link-added {
-	font-style: italic;
-	float: right;
-}
+span.link-added,
 span.link-visited {
+	font-style: italic;
+	font-size: small;
 	float: right;
 }
 
