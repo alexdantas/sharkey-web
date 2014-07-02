@@ -89,5 +89,8 @@ li.link.list-group-item.hoverable-parent.ajax-delete-parent data-link-id="#{link
 
   .row
     span.link-visited
-      | Visited x times
+      - if link.visited?
+        | Visited #{link.visit_count} times
+      - else
+        | Never visited
 

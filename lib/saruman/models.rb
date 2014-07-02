@@ -37,12 +37,13 @@ module Saruman
     # Below are all the database elements
     include DataMapper::Resource
 
-    property :id,       Serial                    # Auto-incremented key
-    property :url,      String, :required => true # Actual URL
-    property :title,    String                    # User-specified title
-    property :added_at, DateTime                  # When this link was added
-    property :comment,  Text
-    property :favorite, Boolean, :default => false
+    property :id,          Serial                    # Auto-incremented key
+    property :url,         String, :required => true # Actual URL
+    property :title,       String                    # User-specified title
+    property :added_at,    DateTime                  # When this link was added
+    property :comment,     Text
+    property :favorite,    Boolean, :default => false
+    property :visit_count, Integer, :default => 0
 
     has n, :taggings
     has n, :tags, :through => :taggings
@@ -123,6 +124,10 @@ module Saruman
 
     def toggle_favorite
       self.update(favorite: (not self.favorite));
+    end
+
+    def visited?
+      self.visit_count != 0
     end
   end
 
