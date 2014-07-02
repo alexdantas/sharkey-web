@@ -41,6 +41,7 @@ module Saruman
     property :url,      String, :required => true # Actual URL
     property :title,    String                    # User-specified title
     property :added_at, DateTime                  # When this link was added
+    property :comment,  Text
 
     has n, :taggings
     has n, :tags, :through => :taggings
@@ -59,7 +60,7 @@ module Saruman
     # @param added_at DateTime object or `nil` for DateTime.now
     # @param category An ID of _existing_ category
     #
-    def self.create_link(title, url, added_at, tags, category)
+    def self.create_link(title, url, added_at, tags, category, comment)
       # Silently fail
       return if url.nil?
 
@@ -72,11 +73,13 @@ module Saruman
       # This array will contain the Tags objects
       # created here
       the_tags = []
-      tags.each do |tag|
+      if (not tags.nil?) and (not tags.empty?)
+        tags.each do |tag|
 
-        # If Saruman::Tag exists, return it.
-        # Otherwise, create it
-        the_tags << Saruman::Tag.first_or_create(name: tag)
+          # If Saruman::Tag exists, return it.
+          # Otherwise, create it
+          the_tags << Saruman::Tag.first_or_create(name: tag)
+        end
       end
 
       # Actually populating the database with
@@ -85,7 +88,8 @@ module Saruman
                            url:      url,
                            added_at: added_at || DateTime.now,
                            tags:     the_tags,
-                           category: Saruman::Category.get(category))
+                           category: Saruman::Category.get(category),
+                           comment:  comment || "")
       end
 
     # Returns all Links that have a Tag with `tag_id`

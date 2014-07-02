@@ -41,7 +41,8 @@ module Saruman
                                   url,
                                   added_at,
                                   tags,
-                                  nil)
+                                  nil,
+                                  "")
       end
 
     end

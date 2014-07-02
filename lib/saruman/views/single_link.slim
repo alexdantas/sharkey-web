@@ -60,6 +60,12 @@ li.link.list-group-item.hoverable-parent.ajax-delete-parent
 
   .row
     span.link-description
+      / We need this to retain line breaks
+        from the original comment
+      - if link.comment
+        - link.comment.split("\n").each do |line|
+          = line
+          br/
 
     span.link-added
       ruby:

@@ -52,6 +52,16 @@
                   input.form-control.tagsinput#input-link-tags type="text" name="tags" placeholder="tag (comma-separated)"
 
               .form-group
+                label.col-sm-2.control-label for="input-links-url"
+                  | Comments
+                .col-sm-10
+                  textarea.form-control#input-links-comment[
+                    type="textarea"
+                    name="comment"
+                    placeholder="express yourself"
+                  ]
+
+              .form-group
                 label.col-sm-2.control-label for="input-link-category-one"
                   | Category
                 .col-sm-10
@@ -108,7 +118,6 @@
                   button.btn.btn-default#new-category-button type="submit"
                     span> class="glyphicon glyphicon-book"
                     | Create Category
-
 
           .tab-pane#multiple-links
             / Form that creates several Links

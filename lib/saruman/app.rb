@@ -236,7 +236,8 @@ module Saruman
                                 params[:url],
                                 params[:added_at],
                                 params[:tags],
-                                params[:category])
+                                params[:category],
+                                params[:comment])
 
       # If AJAX request, don't redirect anywhere!
       redirect back unless request.xhr?
@@ -250,7 +251,8 @@ module Saruman
                                   url,
                                   nil,
                                   params[:tags] || [],
-                                  params[:category])
+                                  params[:category],
+                                  "")
       end
       redirect back unless request.xhr?
     end
