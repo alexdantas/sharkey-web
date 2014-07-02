@@ -107,10 +107,11 @@ module Saruman
       end
 
       # Converts `datetime` object into a formatted date String
+      # suited for HTML5's <time datetime=""> attributes!
       def formatted_date datetime
         return '' if datetime.nil?
 
-        datetime.strftime '%H:%m %d-%m-%Y'
+        datetime.strftime '%Y-%m-%d %H:%m'
       end
     end
 

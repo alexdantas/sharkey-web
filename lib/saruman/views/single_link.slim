@@ -64,17 +64,17 @@ li.link.list-group-item.hoverable-parent.ajax-delete-parent data-link-id="#{link
 
     span.link-added
       | Added
-      a<> href="#" title="#{formatted_date(link.added_at)}"
-        time = relative_date(link.added_at)
+      time<> datetime="#{formatted_date(link.added_at)}"
+        | #{relative_date(link.added_at)}
       | ago
 
   .row
     span.link-visited
       span.link-visited-date
         - if link.visited?
-          ' Last visited
-          a<> href="#" title="#{formatted_date(link.last_visit)}"
-            time = relative_date(link.last_visit)
+          | Last visited
+          time<> datetime="#{formatted_date(link.last_visit)}"
+            | #{relative_date(link.last_visit)}
           | ago
 
       '
