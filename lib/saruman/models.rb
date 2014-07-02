@@ -45,6 +45,7 @@ module Saruman
     property :comment,     Text
     property :favorite,    Boolean, :default => false
     property :visit_count, Integer, :default => 0
+    property :last_visit,  DateTime
 
     has n, :taggings
     has n, :tags, :through => :taggings
@@ -134,6 +135,7 @@ module Saruman
 
     # Increases the visit count by one
     def visit
+      self.update(last_visit: DateTime.now);
       self.update(visit_count: (self.visit_count + 1));
     end
   end

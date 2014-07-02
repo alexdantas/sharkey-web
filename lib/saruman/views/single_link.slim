@@ -81,11 +81,13 @@ li.link.list-group-item.hoverable-parent.ajax-delete-parent data-link-id="#{link
 
   .row
     span.link-visited
-      - if link.visited?
-        - if link.visit_count == 1
-          | Visited once
-        - else
-          | Visited #{link.visit_count} times
-      - else
-        | Never visited
+      span.link-visited-date
+        - if link.visited?
+          ' Last visited
+          = link.last_visit
+      '
+      span.badge.link-visited-count
+        span.glyphicon.glyphicon-open
+        '
+        = link.visit_count
 
