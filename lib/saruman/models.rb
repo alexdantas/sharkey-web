@@ -63,6 +63,12 @@ module Saruman
       # Silently fail
       return if url.nil?
 
+      # Do not allow local URLs!
+      # If it doesn't have a '://' on the beginning, assume 'http://'
+      if not url =~ /:\/\//
+        url = 'http://' + url
+      end
+
       # This array will contain the Tags objects
       # created here
       the_tags = []
