@@ -13,6 +13,7 @@
 #
 
 require 'data_mapper'
+require 'addressable/uri'
 
 module Saruman
 
@@ -38,7 +39,7 @@ module Saruman
     include DataMapper::Resource
 
     property :id,          Serial                    # Auto-incremented key
-    property :url,         String, :required => true # Actual URL
+    property :url,         URI, :required => true    # Actual URL
     property :title,       String                    # User-specified title
     property :added_at,    DateTime                  # When this link was added
     property :comment,     Text
@@ -66,10 +67,10 @@ module Saruman
       # Silently fail
       return if url.nil?
 
-      # Do not allow local URLs!
-      # If it doesn't have a '://' on the beginning, assume 'http://'
-      if not url =~ /:\/\//
-        url = 'http://' + url
+      # Do not allow relative URLs!
+      # Always assume HTTP
+      if Addressable::URI.parse(url).relative?
+        url = 'http://#{url}'
       end
 
       # This array will contain the Tags objects

@@ -12,15 +12,7 @@ li.link.list-group-item.hoverable-parent.ajax-delete-parent data-link-id="#{link
       - else
         a href="#{link.url}" = link.title
     span.link-title-short-url
-
-      / This magical Regular Expression does right this:
-        http://coisa.com            => coisa.com
-        http://coisa.com.br         => coisa.com
-        ftp://coisa.com.br          => coisa.com
-        ftp://coisa.com.br/         => coisa.com
-        ftp://coisa.com.br/whatever => coisa.com
-        https://coisa.com/?0129321  => coisa.com
-      | #{link.url[/:\/\/(.+\..+)([.\/]|$)/, 1]}
+      | #{link.url.host}
 
   .row
     .link-category
