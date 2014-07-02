@@ -1,41 +1,35 @@
 
 h1.page-header Tag Cloud
 
-/ Artbitrary values
-- min = 12
-- max = 72
-- smaller = 12
-- bigger  = 0
+- if @tags.empty?
 
-#tagcloud
-  - @tags.each do |tag|
-    - current = tag.links.count
-    - if current < min
-      - current = min + current
-    - if current > max
-      - current = max - current
+  .alert.alert-info
+    | You have no tags!
 
-    - smaller = current if current < smaller
-    - bigger  = current if current > bigger
+- else
 
-    a href="/tag/#{tag.id}" rel="#{current}" = tag.name
+  / Artbitrary values
+  - min = 12
+  - max = 72
+  - smaller = 12
+  - bigger  = 0
 
-/ Actually activating Tag Cloud
-javascript:
+  #tagcloud
+    - @tags.each do |tag|
+      - current = tag.links.count
+      - if current < min
+        - current = min + current
+      - if current > max
+        - current = max - current
 
-  $(function () {
-    $.fn.tagcloud.defaults = {
-      size: {
-        start: #{smaller},
-        end:   #{bigger},
-        unit: 'pt'
-      },
-      color: {
-        start: '#f5f5f5',
-          end: '#428bca'
-      }
-    };
+      - smaller = current if current < smaller
+      - bigger  = current if current > bigger
 
-    $('#tagcloud a').tagcloud();
-  });
+      a href="/tag/#{tag.id}" rel="#{current}" = tag.name
+
+  / Actually activating the Tag Cloud
+  script src="/js/lib/jquery.tagcloud.js"
+  script src="/js/page-tagcloud.js"
+  javascript:
+    activateTagCloud(#{smaller}, #{bigger})
 

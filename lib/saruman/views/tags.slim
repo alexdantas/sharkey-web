@@ -61,12 +61,17 @@ h2.sub-header Tag list
             '
             | Also delete links within
 
+
+
+
+
   #tags
     ul.list-group
       - @tags.each do |the_tag|
         == slim(:single_tag, locals: { tag: the_tag })
 
   / This page's specific scripts
+  script src="/js/lib/jquery.fancytree-all.js"
   script src="/js/ajaxmanager.js"
   script src="/js/page-tags.js"
 

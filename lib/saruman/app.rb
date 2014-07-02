@@ -42,6 +42,8 @@ module Saruman
         # all Saruman::Tag associations
         link.taggings.destroy       if link.taggings
         link.categorization.destroy if link.categorization
+
+        link.reload
         link.destroy
       end
 
@@ -50,6 +52,8 @@ module Saruman
         return if not tag
 
         tag.taggings.destroy if tag.taggings
+
+        tag.reload
         tag.destroy
       end
 
@@ -64,7 +68,10 @@ module Saruman
 
         # Removing ties to other Categories...
         if category.parent
-          category.parent.remove_child(category)
+          category.parent.remove_child category
+        end
+        if category.categoryParent
+          category.categoryParent.destroy
         end
 
         if not category.childs.empty?
@@ -72,9 +79,12 @@ module Saruman
         end
 
         # ...and to other Links...
-        category.categorizations.destroy if category.categorizations
+        if category.categorizations
+          category.categorizations.destroy
+        end
 
         # ...and finally to itself
+        category.reload
         category.destroy
       end
 
@@ -123,6 +133,29 @@ module Saruman
       end
 
       delete_tag params[:id]
+
+      # If this is an AJAX request, we don't need
+      # to redirect anywhere!
+      # The JavaScript is responsible for updating
+      # the page, not us!
+      redirect back unless request.xhr?
+    end
+
+    # Extra parameters:
+    #
+    # - destroy_links If should also destroy links with this category
+    #
+    delete '/category/:id' do
+
+      # Welp, here we go!
+      # Send a DELETE request for each link
+      if (params[:destroy_links])
+        links = Saruman::Link.by_category(params[:id])
+
+        links.each { |link| delete_link link.id }
+      end
+
+      delete_category params[:id]
 
       # If this is an AJAX request, we don't need
       # to redirect anywhere!
@@ -216,7 +249,7 @@ module Saruman
         Saruman::Link.create_link(nil,
                                   url,
                                   nil,
-                                  params[:tags],
+                                  params[:tags] || [],
                                   params[:category])
       end
       redirect back unless request.xhr?
