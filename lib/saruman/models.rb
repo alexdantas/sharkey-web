@@ -127,8 +127,14 @@ module Saruman
       self.update(favorite: (not self.favorite));
     end
 
+    # Tells if this link was ever visited
     def visited?
       self.visit_count != 0
+    end
+
+    # Increases the visit count by one
+    def visit
+      self.update(visit_count: (self.visit_count + 1));
     end
   end
 

@@ -401,11 +401,20 @@ module Saruman
     #
     # Returns the item's favorite state _after_ the change.
     post '/favorite/:id' do
-      the_link = Saruman::Link.get(params[:id])
+      the_link = Saruman::Link.get params[:id]
       return 502 if not the_link
 
       the_link.toggle_favorite
       return "{ \"isFavorite\": #{the_link.favorite} }"
+    end
+
+    # Increase the visit count of a link
+    post '/visit/:id' do
+      the_link = Saruman::Link.get params[:id]
+      return 502 if not the_link
+
+      the_link.visit
+      return "{ \"visitCount\": #{the_link.visit_count} }"
     end
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

@@ -8,9 +8,9 @@ li.link.list-group-item.hoverable-parent.ajax-delete-parent data-link-id="#{link
   .row
     span.link-title
       - if link.title.empty?
-        a href="#{link.url}" = link.url
+        a target="_blank" href="#{link.url}" = link.url
       - else
-        a href="#{link.url}" = link.title
+        a target="_blank"  href="#{link.url}" = link.title
     span.link-title-short-url
       | #{link.url.host}
 
@@ -82,7 +82,10 @@ li.link.list-group-item.hoverable-parent.ajax-delete-parent data-link-id="#{link
   .row
     span.link-visited
       - if link.visited?
-        | Visited #{link.visit_count} times
+        - if link.visit_count == 1
+          | Visited once
+        - else
+          | Visited #{link.visit_count} times
       - else
         | Never visited
 
