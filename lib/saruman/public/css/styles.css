@@ -92,14 +92,53 @@ body {
 	display: block;
 }
 
-.link-title,
-.tag-title {
-	width       : 100%;
-	font-size   : 120%;
-	font-weight : bold;
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Each single Link
+ */
+li.link {
+
 }
-.link-added {
+li.link .row {
+	margin: 0;
+}
+/* what? CSS starts counting from 1??? */
+li.link .row:nth-child(4) {
+	margin-top: 10px;
+}
+span.link-title, span.tag-title {
+	font-size   : 130%;
+	font-weight : bold;
+	float       : left;
+}
+span.link-title-short-url {
+	color: rgb(100, 100, 100);
+	font-size: small;
 	font-style: italic;
+	vertical-align: sub;
+	margin-left: 10px;
+}
+
+span.link-checkbox {
+	float: left;
+}
+span.link-controls {
+	float: right;
+}
+span.link-controls > button,
+span.link-controls > form {
+	float: right;
+	margin: 0 2px;
+}
+
+span.link-description {
+	float: left;
+}
+span.link-added {
+	font-style: italic;
+	float: right;
+}
+span.link-visited {
+	float: right;
 }
 
 .link-tag:first-child {
@@ -118,10 +157,14 @@ body {
 	text-decoration: none;
 }
 
-.link-internal-link,
+span.link-internal-link,
 .tag-internal-link,
 .category-internal-link {
-	margin-right: 15px;
+	margin: 0 10px;
+	float: left;
+}
+span.link-internal-link a:hover {
+	background-color: #428bca;
 }
 
 .random-sentence {
