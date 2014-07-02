@@ -63,19 +63,29 @@ li.link.list-group-item.hoverable-parent.ajax-delete-parent data-link-id="#{link
           br/
 
     span.link-added
-      | Added
-      time<> datetime="#{formatted_date(link.added_at)}"
-        | #{relative_date(link.added_at)}
-      | ago
+      - if Saruman::Setting['date_format'] == 'relative'
+        | Added
+        time<> datetime="#{formatted_date(link.added_at)}"
+          | #{relative_date(link.added_at)}
+        | ago
+      - else
+        | Added
+        time< datetime="#{formatted_date(link.added_at)}"
+          | #{formatted_date(link.added_at)}
 
   .row
     span.link-visited
       span.link-visited-date
         - if link.visited?
-          | Last visited
-          time<> datetime="#{formatted_date(link.last_visit)}"
-            | #{relative_date(link.last_visit)}
-          | ago
+          - if Saruman::Setting['date_format'] == 'relative'
+            | Last visited
+            time<> datetime="#{formatted_date(link.last_visit)}"
+              | #{relative_date(link.last_visit)}
+            | ago
+          - else
+            | Last visited
+            time< datetime="#{formatted_date(link.last_visit)}"
+              | #{formatted_date(link.last_visit)}
 
       '
       span.badge.link-visited-count
