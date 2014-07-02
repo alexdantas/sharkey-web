@@ -29,7 +29,9 @@ li.folder.list-group-item.nolink
               a.link-internal-link href="/link/#{link.id}"
 
               - if link.title.empty?
-                a href="#{link.url}" = link.url
+                a.link-link target="_blank" href="#{link.url}" data-link-id="#{link.id}"
+                  | #{link.url}
               - else
-                a href="#{link.url}" = link.title
+                a.link-link target="_blank" href="#{link.url}" data-link-id="#{link.id}"
+                  | #{link.title}
 

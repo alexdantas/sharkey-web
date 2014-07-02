@@ -71,7 +71,7 @@ module Saruman
       # Do not allow relative URLs!
       # Always assume HTTP
       if Addressable::URI.parse(url).relative?
-        url = 'http://#{url}'
+        url = "http://#{url}"
       end
 
       # This array will contain the Tags objects
