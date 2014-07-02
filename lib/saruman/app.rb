@@ -88,6 +88,10 @@ module Saruman
         category.destroy
       end
 
+      def random_sentence
+        @sentences ||= File.readlines(File.join(File.dirname(__FILE__), '/public/data/sentences.txt'))
+        @sentences.sample
+      end
     end
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

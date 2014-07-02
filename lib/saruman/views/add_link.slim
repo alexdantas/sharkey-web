@@ -7,11 +7,12 @@
       .modal-header
         button.close type="button" data-dismiss="modal" aria-hidden="true"
           | &times;
+
         h4.modal-title#input-link-label
-          | Summon New Link
+          | Add new link
 
         p.random-sentence
-          | ...Because links are never enough
+          | ...#{random_sentence}
 
         ul.nav.nav-pills#single-multiple-link-tab role="tablist"
           li.active
@@ -34,7 +35,7 @@
 
               .form-group
                 .col-sm-offset-2.col-sm-10
-                  button.btn.btn-default type="submit"
+                  button.btn.btn-primary type="submit"
                     span.glyphicon.glyphicon-flash
                     '
                     | Summon new Link
