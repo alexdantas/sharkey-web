@@ -77,6 +77,13 @@ body {
 	color: #428bca;
 	background-color: #fff;
 }
+#the-sidebar {
+	/* It's set to position absolute
+	 * and since we have a 50px fixed navbar
+	 * we make it have a huge-ass padding instead */
+	top: 0;
+	padding-top: 65px;
+}
 
 /*
  * Main content
