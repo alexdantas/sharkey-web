@@ -44,11 +44,11 @@ li.link.list-group-item.hoverable-parent.ajax-delete-parent data-link-id="#{link
 
       form action="/link/#{link.id}" method="POST"
         .form-group
-          /
-            Most browsers don't recognize the DELETE
+          / Most browsers don't recognize the DELETE
             HTTP method, so this is a fake for Sinatra
             to recognize it as DELETE anyway
           input type="hidden" name="_method" value="DELETE"
+
           button.ajax-delete.btn.btn-xs.btn-primary type="submit" title="Delete Link"
             span.glyphicon.glyphicon-trash
 

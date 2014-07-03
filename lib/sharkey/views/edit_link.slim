@@ -17,7 +17,10 @@
 
       .modal-body
         / Form that creates a Link
-        form.form-horizontal role="form" action="/link" method="POST"
+          It's 'action' will get changed by the JavaScript
+          to conform to the API like '/update/link/:id'
+        form.form-horizontal role="form" action="/update/link" method="POST"
+
           .form-group
             label.col-sm-2.control-label for="input-link-url"
               | URL

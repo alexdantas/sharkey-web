@@ -225,7 +225,6 @@ module Sharkey
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     # Individual pages
-
     get '/link/:id' do
       the_link = Sharkey::Link.get(params[:id])
       redirect to '/' if not the_link
@@ -298,6 +297,28 @@ module Sharkey
       else
         redirect back
       end
+    end
+
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    # Updating things
+    #
+    # Unfortunately I couldn't use the PUT method - even when
+    # adding a hidden '<input>' and all that crap.
+    # It ain't the order of Sinatra routes also... So I fell
+    # back to good old POST with different URL.
+
+    post '/update/link/:id' do
+      return 404 if not params[:id]
+
+      Sharkey::Link.update_link(params[:id],
+                                params[:title],
+                                params[:url],
+                                params[:tags],
+                                params[:category],
+                                params[:comment])
+
+      # If AJAX request, don't redirect anywhere!
+      redirect back unless request.xhr?
     end
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

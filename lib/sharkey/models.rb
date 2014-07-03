@@ -64,7 +64,7 @@ module Sharkey
     # @param added_at DateTime object or `nil` for DateTime.now
     # @param category An ID of _existing_ category
     #
-    def self.create_link(title, url, added_at, tags, category, comment)
+    def self.create_link(title, url, tags, category, comment)
       # Silently fail
       return if url.nil?
 
@@ -95,6 +95,29 @@ module Sharkey
                            category: Sharkey::Category.get(category),
                            comment:  comment || "")
       end
+
+    def self.update_link(id, title, url, tags, category, comment)
+      return if id.nil? or url.nil?
+
+      # This array will contain the Tags objects
+      # created here
+      the_tags = []
+      if (not tags.nil?) and (not tags.empty?)
+        tags.each do |tag|
+
+          # If Sharkey::Tag exists, return it.
+          # Otherwise, create it
+          the_tags << Sharkey::Tag.first_or_create(name: tag)
+        end
+      end
+
+      Sharkey::Link.get(id).update(title:    title,
+                                   url:      url,
+                                   tags:     the_tags,
+                                   category: Sharkey::Category.get(category),
+                                   comment:  comment || "");
+
+    end
 
     # Returns all Links that have a Tag with `tag_id`
     def self.by_tag(tag_id)
