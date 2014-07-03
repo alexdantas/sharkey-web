@@ -1,6 +1,25 @@
 /**
- * Default settings
+ * Default settings - overriding all the themes.
  */
+
+/**
+ * Sleek custom font for the brand logo
+ *
+ * Thanks a lot, Web Font Generator!
+ * http://www.web-font-generator.com/
+ */
+@font-face {
+	/* Actually 'Quadrata Preciosa Extended' */
+	font-family: 'Quadrata';
+	src: url('/fonts/Quadrata.eot?')         format('eot'),
+	     url('/fonts/Quadrata.woff')         format('woff'),
+		 url('/fonts/Quadrata.ttf')          format('truetype'),
+		 url('/fonts/Quadrata.svg#Quadrata') format('svg');
+}
+#the-navbar a.navbar-brand {
+	font-family: 'Quadrata';
+	font-size: 36pt;
+}
 
 /* Moving down everything because
  * we have a fixed navbar 50px tall */
