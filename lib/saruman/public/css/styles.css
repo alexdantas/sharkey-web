@@ -182,7 +182,10 @@ span.link-internal-link a:hover {
 	margin: 0 2px;
 }
 
-
+/* the search form at the navbar */
+#the-navbar .input-group {
+	max-width: 360px;
+}
 
 
 
