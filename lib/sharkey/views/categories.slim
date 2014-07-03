@@ -16,50 +16,76 @@ h2.sub-header Category list
   p.help-block
     | Navigate with your keyboard (arrow keys, enter, space, backspace, + and -)
 
-  / Controller for actions on the category list
-  #categories-buttons
-    ul.pagination
-      li#categories-expand
-        a href="#"
-          span.glyphicon.glyphicon-resize-full
-          '
-          | Expand all
-      li#categories-collapse
-        a href="#"
-          span.glyphicon.glyphicon-resize-small
-          '
-          | Collapse all
-      li#categories-edit
-        a href="#"
-          span.glyphicon.glyphicon-pencil
-          '
-          | Edit
-      li#categories-select-all
-        a href="#"
-          span.glyphicon.glyphicon-check
-          '
-          | Select all
-      li#categories-select-none
-        a href="#"
-          span.glyphicon.glyphicon-unchecked
-          '
-          | Select none
-      li#categories-select-toggle
-        a href="#"
-          span.glyphicon.glyphicon-share
-          '
-          | Toggle selection
-      li#categories-delete
-        a href="#"
-          span.glyphicon.glyphicon-remove
-          '
-          | Delete selected
-      li.btn-group#categories-delete-links data-toggle="buttons"
-        label.btn.btn-warning
-          input type="checkbox"
-            span.glyphicon.glyphicon-fire
+  .well.well-sm
+    / Controller for sorting actions on the category list
+    #categorys-sorting
+      ul.nav.nav-pills
+        li#categories-sort-name
+          form role="form" action="/categories" method="GET"
+            input type="hidden" name="sort" value="name"
+            button.btn.btn-default type="submit"
+              span.glyphicon.glyphicon-sort-by-alphabet
+              '
+              | Sort by Name
+        li#categories-sort-name
+          form role="form" action="/categories" method="GET"
+            input type="hidden" name="sort" value="count"
+            button.btn.btn-default type="submit"
+              span.glyphicon.glyphicon-sort-by-order
+              '
+              | Sort by Links
+        li#categories-sort-name
+          form role="form" action="/categories" method="GET"
+            input type="hidden" name="sort" value="id"
+            button.btn.btn-default type="submit"
+              span.glyphicon.glyphicon-sort-by-attributes
+              '
+              | Sort by Creation
+
+    / Controller for actions on the category list
+    #categories-buttons
+      ul.nav.nav-pills
+        li#categories-expand
+          button.btn.btn-default
+            span.glyphicon.glyphicon-resize-full
             '
-            | Also delete links within
+            | Expand all
+        li#categories-collapse
+          button.btn.btn-default
+            span.glyphicon.glyphicon-resize-small
+            '
+            | Collapse all
+        li#categories-edit
+          button.btn.btn-default
+            span.glyphicon.glyphicon-pencil
+            '
+            | Edit
+        li#categories-select-all
+          button.btn.btn-default
+            span.glyphicon.glyphicon-check
+            '
+            | Select all
+        li#categories-select-none
+          button.btn.btn-default
+            span.glyphicon.glyphicon-unchecked
+            '
+            | Select none
+        li#categories-select-toggle
+          button.btn.btn-default
+            span.glyphicon.glyphicon-share
+            '
+            | Toggle selection
+        li#categories-delete
+          button.btn.btn-default
+            span.glyphicon.glyphicon-remove
+            '
+            | Delete selected
+        li.btn-group#categories-delete-links data-toggle="buttons"
+          label.btn.btn-warning
+            input type="checkbox"
+              span.glyphicon.glyphicon-fire
+              '
+              | Also delete links within
 
 
   #categories

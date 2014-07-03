@@ -352,6 +352,19 @@ module Sharkey
       # Then, recursively show their children
       @categories = Sharkey::Category.orphans
 
+      # Now, the user can send other values to
+      # specify how they will get sorted
+      case params[:sort]
+      when 'name'
+        @categories = @categories.sort_by { |t| t.name }
+
+      when 'count'
+        @categories = @categories.sort_by { |t| t.categorizations.count } .reverse
+
+      when 'id'
+        @categories = @categories.sort_by { |t| t.id }
+      end
+
       slim(:categories,
            :layout => :dashboard,
            :locals => { page: "categories" })
