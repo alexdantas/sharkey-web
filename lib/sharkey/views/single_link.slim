@@ -15,7 +15,7 @@ li.link.list-group-item.hoverable-parent.ajax-delete-parent data-link-id="#{link
       | #{link.url.host}
 
   .row
-    .link-category
+    .link-categories
       - if link.category
         a.link-category href="/category/#{link.category.id}" title="#{link.category.name}"
           span.label.label-default = link.category.name
@@ -39,7 +39,7 @@ li.link.list-group-item.hoverable-parent.ajax-delete-parent data-link-id="#{link
       button.btn.btn-xs.btn-primary.link-favorite title="Favorite"
         span class="glyphicon glyphicon-star#{if not link.favorite then '-empty' end}"
 
-      button.btn.btn-xs.btn-primary.link-edit title="Edit Link" data-target="#edit-link"
+      button.btn.btn-xs.btn-primary.link-edit title="Edit Link" data-toggle="modal" data-target="#edit-link"
         span.glyphicon.glyphicon-pencil
 
       form action="/link/#{link.id}" method="POST"
