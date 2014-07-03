@@ -316,7 +316,7 @@ module Sharkey
     get '/tags' do
       # Creating an instance variable
       # (visible inside all Views)
-      @tags = Sharkey::Tag.all.sort
+      @tags = Sharkey::Tag.all
 
       # MagicSuggest, the jQuery plugin, uses this to give
       # suggestions on Tag input fields.
@@ -324,7 +324,20 @@ module Sharkey
       # If request is AJAX, return a JSON
       # array with all existing tags
       if request.xhr?
-        return @tags.to_json
+        return @tags.sort.to_json
+      end
+
+      # Now, the user can send other values to
+      # specify how they will get sorted
+      case params[:sort]
+      when 'name'
+        @tags = @tags.sort_by { |t| t.name }
+
+      when 'count'
+        @tags = @tags.sort_by { |t| t.taggings.count } .reverse
+
+      when 'id'
+        @tags = @tags.sort_by { |t| t.id }
       end
 
       slim(:tags,

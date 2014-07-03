@@ -1,10 +1,6 @@
 / Lists all tags
 
-h1.page-header Tags
-
-p Page with everything about your tags
-
-h2.sub-header Tag list
+h1.page-header Tag List
 
 - if @tags.empty?
 
@@ -16,50 +12,76 @@ h2.sub-header Tag list
   p.help-block
     | Navigate with your keyboard (arrow keys, enter, space, backspace, + and -)
 
-  / Controller for actions on the tag list
-  #tags-buttons
-    ul.pagination
-      li#tags-expand
-        a href="#"
-          span.glyphicon.glyphicon-resize-full
-          '
-          | Expand all
-      li#tags-collapse
-        a href="#"
-          span.glyphicon.glyphicon-resize-small
-          '
-          | Collapse all
-      li#tags-edit
-        a href="#"
-          span.glyphicon.glyphicon-pencil
-          '
-          | Edit
-      li#tags-select-all
-        a href="#"
-          span.glyphicon.glyphicon-check
-          '
-          | Select all
-      li#tags-select-none
-        a href="#"
-          span.glyphicon.glyphicon-unchecked
-          '
-          | Select none
-      li#tags-select-toggle
-        a href="#"
-          span.glyphicon.glyphicon-share
-          '
-          | Toggle selection
-      li#tags-delete
-        a href="#"
-          span.glyphicon.glyphicon-remove
-          '
-          | Delete selected
-      li.btn-group#tags-delete-links data-toggle="buttons"
-        label.btn.btn-warning
-          input type="checkbox"
-            span.glyphicon.glyphicon-fire
+  .well.well-sm
+    / Controller for sorting actions on the tag list
+    #tags-sorting
+      ul.nav.nav-pills
+        li#tags-sort-name
+          form role="form" action="/tags" method="GET"
+            input type="hidden" name="sort" value="name"
+            button.btn.btn-default type="submit"
+              span.glyphicon.glyphicon-sort-by-alphabet
+              '
+              | Sort by Name
+        li#tags-sort-name
+          form role="form" action="/tags" method="GET"
+            input type="hidden" name="sort" value="count"
+            button.btn.btn-default type="submit"
+              span.glyphicon.glyphicon-sort-by-order
+              '
+              | Sort by Links
+        li#tags-sort-name
+          form role="form" action="/tags" method="GET"
+            input type="hidden" name="sort" value="id"
+            button.btn.btn-default type="submit"
+              span.glyphicon.glyphicon-sort-by-attributes
+              '
+              | Sort by Creation
+
+    / Controller for actions on the tag list
+    #tags-buttons
+      ul.nav.nav-pills
+        li#tags-expand
+          button.btn.btn-default
+            span.glyphicon.glyphicon-resize-full
             '
-            | Also delete links within
+            | Expand all
+        li#tags-collapse
+          button.btn.btn-default
+            span.glyphicon.glyphicon-resize-small
+            '
+            | Collapse all
+        li#tags-edit
+          button.btn.btn-default
+            span.glyphicon.glyphicon-pencil
+            '
+            | Edit
+        li#tags-select-all
+          button.btn.btn-default
+            span.glyphicon.glyphicon-check
+            '
+            | Select all
+        li#tags-select-none
+          button.btn.btn-default
+            span.glyphicon.glyphicon-unchecked
+            '
+            | Select none
+        li#tags-select-toggle
+          button.btn.btn-default
+            span.glyphicon.glyphicon-share
+            '
+            | Toggle selection
+        li#tags-delete
+          button.btn.btn-default
+            span.glyphicon.glyphicon-remove
+            '
+            | Delete selected
+        li.btn-group#tags-delete-links data-toggle="buttons"
+          label.btn.btn-warning
+            input type="checkbox"
+              span.glyphicon.glyphicon-fire
+              '
+              | Also delete links within
 
 
 
