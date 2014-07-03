@@ -1,24 +1,24 @@
 / The 'Add Button' dialog
   It will only get shown when requested by a button
 
-.modal.fade#input-link tabindex="-1" role="dialog" aria-labelledby="input-link-label" aria-hidden="true"
+.modal.fade.input-link#add-link tabindex="-1" role="dialog" aria-labelledby="input-link-label" aria-hidden="true"
   .modal-dialog
     .modal-content
       .modal-header
         button.close type="button" data-dismiss="modal" aria-hidden="true"
           | &times;
 
-        h4.modal-title#input-link-label
+        h4.modal-title.input-link-label
           | Add new link
 
         p.random-sentence
           | ...#{random_sentence}
 
-        ul.nav.nav-pills#single-multiple-link-tab role="tablist"
+        ul.nav.nav-pills.single-multiple-link-tab role="tablist"
           li.active
-            a#single-link-activate href="#single-link" data-toggle="tab" Single Link
+            a.single-link-activate href="#single-link" data-toggle="tab" Single Link
           li
-            a#multiple-link-activate href="#multiple-links" data-toggle="tab" Multiple Links
+            a.multiple-link-activate href="#multiple-links" data-toggle="tab" Multiple Links
       .modal-body
 
 
@@ -50,13 +50,13 @@
                 label.col-sm-2.control-label for="input-link-tags"
                   | Tags
                 .col-sm-10
-                  input.form-control.tagsinput#input-link-tags type="text" name="tags" placeholder="tag (comma-separated)"
+                  input.form-control.tagsinput.input-link-tags type="text" name="tags" placeholder="tag (comma-separated)"
 
               .form-group
                 label.col-sm-2.control-label for="input-links-url"
                   | Comments
                 .col-sm-10
-                  textarea.form-control#input-links-comment[
+                  textarea.form-control.input-links-comment[
                     type="textarea"
                     name="comment"
                     placeholder="express yourself"
@@ -66,7 +66,7 @@
                 label.col-sm-2.control-label for="input-link-category-one"
                   | Category
                 .col-sm-10
-                  select.form-control#input-link-category-one name="category" placeholder="Category"
+                  select.form-control.input-link-category-one name="category" placeholder="Category"
                     ruby:
                       # This magic function shows all Categories in
                       # hierarchical order. Just like:
@@ -98,25 +98,25 @@
                     == select_options
 
                 .col-sm-offset-2.col-sm-10
-                  button.btn.btn-default#new-category
+                  button.btn.btn-default.new-category
                     span> class="glyphicon glyphicon-book"
                     | New Category
 
-            form.form-horizontal#new-category-form role="form" action="/category" method="POST"
+            form.form-horizontal.new-category-form role="form" action="/category" method="POST"
               .form-group
 
                 label.col-sm-2.control-label for="new-category-name"
                   | Name
                 .col-sm-10
-                  input.form-control#new-category-name type="text"  name="name" placeholder="New category name" required="true" autofocus="true"
+                  input.form-control.new-category-name type="text"  name="name" placeholder="New category name" required="true" autofocus="true"
 
                 label.col-sm-2.control-label for="new-category-parent"
                   | Parent
                 .col-sm-10
-                  select.form-control#new-category-parent name="parent" placeholder="Parent"
+                  select.form-control.new-category-parent name="parent" placeholder="Parent"
                     == select_options
 
-                  button.btn.btn-default#new-category-button type="submit"
+                  button.btn.btn-default.new-category-button type="submit"
                     span> class="glyphicon glyphicon-book"
                     | Create Category
 
@@ -146,7 +146,7 @@
                 label.col-sm-2.control-label for="input-link-category-two"
                   | Category
                 .col-sm-10
-                  select.form-control#input-link-category-two name="category" placeholder="Category"
+                  select.form-control.input-link-category-two name="category" placeholder="Category"
                     == select_options
 
       / If you ever want to add a footer some day,
