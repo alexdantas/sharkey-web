@@ -11,25 +11,44 @@ h1.page-header Tag Cloud
   / Artbitrary values
   - min = 12
   - max = 72
-  - smaller = 12
-  - bigger  = 0
+  - smaller = max
+  - bigger  = min
+  - rate = 1
 
   #tagcloud
+
+    / First we need to see how many links each
+      tag has, compare with the minimum and
+      maximum and finally calculate the growing
+      rate for the font size
     - @tags.each do |tag|
       - current = tag.links.count
+
       - if current < min
         - current = min + current
+
       - if current > max
         - current = max - current
 
       - smaller = current if current < smaller
       - bigger  = current if current > bigger
 
+    - rate = (max-min)/(bigger-smaller)
+
+    - @tags.each do |tag|
+      - current = (tag.links.count * rate)
       a href="/tag/#{tag.id}" rel="#{current}" = tag.name
 
-  / Actually activating the Tag Cloud
+  / When the page loads, activate the Tag Cloud!
+    We need to define this function out here so
+    it can get changed at `page-tagcloud.js`
+  javascript:
+    var activateTagCloud = function(){}
+
   script src="/js/lib/jquery.tagcloud.js"
   script src="/js/page-tagcloud.js"
   javascript:
-    activateTagCloud(#{smaller}, #{bigger})
+    ($(function () {
+      activateTagCloud(#{smaller}, #{bigger})
+    }))
 

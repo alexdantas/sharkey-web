@@ -205,8 +205,12 @@ span.link-internal-link a:hover {
 }
 
 /* the awesome tagcloud */
+#tagcloud {
+	text-align: center;
+}
 #tagcloud a {
 	margin: 0 2px;
+	text-shadow: 0 1px 1px rgba(207, 207, 207, 1);
 }
 
 /* the search form at the navbar */
