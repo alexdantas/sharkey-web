@@ -3,20 +3,20 @@
 
 h1.page-header Dashboard
 
-p Welcome to Saruman Link!
+p Welcome to Sharkey Link!
 
 p You have...
 
 ul
-  - if Saruman::Link.all.size == 0
+  - if Sharkey::Link.all.size == 0
     li no links;
   - else
-    li #{Saruman::Link.all.size} links;
+    li #{Sharkey::Link.all.size} links;
 
-  - if Saruman::Tag.all.size == 0
+  - if Sharkey::Tag.all.size == 0
     li no tags;
   - else
-    li #{Saruman::Tag.all.size} tags;
+    li #{Sharkey::Tag.all.size} tags;
 
 h2.sub-header Awesome!
 

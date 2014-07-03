@@ -12,20 +12,20 @@ html
       #   '  '   #   #'  ' #   #  # # #  '   #  #'  #
        '''m  m'''#   #     #   #  # # #  m'''#  #   #
       'mmm'  'mm'#   #     'mm'#  # # #  'mm'#  #   #
-      saruman link: the best thing since Delicious
+      sharkey link: the best thing since Delicious
       .
 
-    title Saruman Link
+    title Sharkey Link
 
     / Bootstrap
       (Poor Man's Theme Support)
     link[
       rel="stylesheet" media="screen, projection"
-      href="/themes/#{Saruman::Setting['theme']}/style.css"
+      href="/themes/#{Sharkey::Setting['theme']}/style.css"
     ]
 
     / Misc. Styles
-    - if Saruman::Setting['loading_bar'] == 'true'
+    - if Sharkey::Setting['loading_bar'] == 'true'
       link rel="stylesheet" href="/css/nprogress.css"
 
     link rel="stylesheet" href="/css/magicsuggest.css"
@@ -45,7 +45,7 @@ html
     script src="/js/lib/bootstrap.min.js"
 
     / Misc. Scripts
-    - if Saruman::Setting['loading_bar'] == 'true'
+    - if Sharkey::Setting['loading_bar'] == 'true'
       script src="/js/lib/nprogress.js"
 
     / Custom Scripts
@@ -70,12 +70,12 @@ html
               a#keybind-links href="/links"
                 span> class="glyphicon glyphicon-link"
                 | Links
-                span.badge.pull-right = Saruman::Link.all.size
+                span.badge.pull-right = Sharkey::Link.all.size
             li class="#{ if page == 'favorites' then 'active' end }"
               a#keybind-favorites href="/favorites"
                 span> class="glyphicon glyphicon-star"
                 | Favorites
-                span.badge.pull-right = Saruman::Link.all(favorite: true).size
+                span.badge.pull-right = Sharkey::Link.all(favorite: true).size
 
             li
               a href="/random"
@@ -87,7 +87,7 @@ html
               a#keybind-tags href="/tags"
                 span> class="glyphicon glyphicon-tags"
                 | Tags
-                span.badge.pull-right = Saruman::Tag.all.size
+                span.badge.pull-right = Sharkey::Tag.all.size
 
             li class="#{ if page == 'tagcloud' then 'active' end }"
               a#keybind-tags href="/tagcloud"
@@ -99,7 +99,7 @@ html
               a#keybind-categories href="/categories"
                 span> class="glyphicon glyphicon-book"
                 | Categories
-                span.badge.pull-right = Saruman::Category.all.size
+                span.badge.pull-right = Sharkey::Category.all.size
 
         / The actual content
         .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main

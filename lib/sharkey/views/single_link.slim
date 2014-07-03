@@ -63,7 +63,7 @@ li.link.list-group-item.hoverable-parent.ajax-delete-parent data-link-id="#{link
           br/
 
     span.link-added
-      - if Saruman::Setting['date_format'] == 'relative'
+      - if Sharkey::Setting['date_format'] == 'relative'
         | Added
         time<> datetime="#{formatted_date(link.added_at)}"
           | #{relative_date(link.added_at)}
@@ -77,7 +77,7 @@ li.link.list-group-item.hoverable-parent.ajax-delete-parent data-link-id="#{link
     span.link-visited
       span.link-visited-date
         - if link.visited?
-          - if Saruman::Setting['date_format'] == 'relative'
+          - if Sharkey::Setting['date_format'] == 'relative'
             | Last visited
             time<> datetime="#{formatted_date(link.last_visit)}"
               | #{relative_date(link.last_visit)}

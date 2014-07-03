@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+#
+# Main executable for Sharkey
+
+require File.expand_path(File.dirname(__FILE__) + '/../lib/sharkey')
+require 'vegas'
+
+Vegas::Runner.new(Sharkey::App, 'sharkey')
+

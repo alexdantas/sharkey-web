@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Dependencies on `saruman.gemspec`
+# Dependencies on `sharkey.gemspec`
 gemspec

@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'saruman/version'
+require 'sharkey/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'saruman-web'
-  spec.version       = Saruman::VERSION
+  spec.name          = 'sharkey-web'
+  spec.version       = Sharkey::VERSION
   spec.authors       = ["Alexandre Dantas"]
   spec.email         = ["eu@alexdantas.net"]
   spec.summary       = "Misterious project"
@@ -15,7 +15,7 @@ This is a misterious project.
 Deal with it.
 END
 
-  spec.homepage      = "https://github.com/alexdantas/saruman/"
+  spec.homepage      = "https://github.com/alexdantas/sharkey/"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

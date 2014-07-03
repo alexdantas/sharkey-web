@@ -12,15 +12,15 @@ html
       #   '  '   #   #'  ' #   #  # # #  '   #  #'  #
        '''m  m'''#   #     #   #  # # #  m'''#  #   #
       'mmm'  'mm'#   #     'mm'#  # # #  'mm'#  #   #
-      saruman link: the best thing since Delicious
+      sharkey link: the best thing since Delicious
       .
 
-    title Saruman Link
+    title Sharkey Link
 
     / Poor Man's Theme Support
-    link rel="stylesheet" media="screen, projection" href="/themes/#{Saruman::Setting['theme']}/style.css"
+    link rel="stylesheet" media="screen, projection" href="/themes/#{Sharkey::Setting['theme']}/style.css"
 
-    - if Saruman::Setting['loading_bar'] == 'true'
+    - if Sharkey::Setting['loading_bar'] == 'true'
       link rel="stylesheet" href="/css/nprogress.css"
 
     link rel="stylesheet" href="/css/magicsuggest.css"
@@ -35,7 +35,7 @@ html
 
     script src="/js/lib/bootstrap.min.js"
 
-    - if Saruman::Setting['loading_bar'] == 'true'
+    - if Sharkey::Setting['loading_bar'] == 'true'
       script src="/js/lib/nprogress.js"
 
     script src="/js/page-settings.js"

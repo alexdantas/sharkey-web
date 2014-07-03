@@ -1,3 +1,3 @@
-require File.join(File.dirname(__FILE__), 'lib', 'saruman')
+require File.join(File.dirname(__FILE__), 'lib', 'sharkey')
 
-run Saruman::App.new
+run Sharkey::App.new

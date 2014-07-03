@@ -1,7 +1,7 @@
 
-require 'saruman/models'
+require 'sharkey/models'
 
-module Saruman
+module Sharkey
   # Knows how to import from and export to Netscape Bookmark HTML file.
   #
   # This format is commonly used when importing/exporting bookmarks
@@ -37,7 +37,7 @@ module Saruman
                    else nil
                    end
 
-        Saruman::Link.create_link(title,
+        Sharkey::Link.create_link(title,
                                   url,
                                   added_at,
                                   tags,

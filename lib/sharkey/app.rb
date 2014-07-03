@@ -1,4 +1,4 @@
-# Application file for Saruman
+# Application file for Sharkey
 #
 # Here we define the actions that Sinatra needs to take (routes)
 
@@ -10,18 +10,18 @@ require 'data_mapper'
 require 'date'
 require 'chronic_duration'
 
-# To import Saruman::Links and get page's Titles
+# To import Sharkey::Links and get page's Titles
 require 'nokogiri'
 
 # Create and initialize the databases
-require 'saruman/models'
+require 'sharkey/models'
 
-require 'saruman/setting'
-require 'saruman/importerexporter'
+require 'sharkey/setting'
+require 'sharkey/importerexporter'
 
 require 'json'
 
-module Saruman
+module Sharkey
   class App < Sinatra::Application
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -29,17 +29,17 @@ module Saruman
 
     # Global in-app settings
     # (not related to Sinatra per se)
-    Saruman::Setting.initialize
+    Sharkey::Setting.initialize
 
     # Helper functions that are accessible inside
     # every place
     helpers do
       def delete_link id
-        link = Saruman::Link.get id
+        link = Sharkey::Link.get id
         return if not link
 
         # Before deleting the link, we must remove
-        # all Saruman::Tag associations
+        # all Sharkey::Tag associations
         link.taggings.destroy       if link.taggings
         link.categorization.destroy if link.categorization
 
@@ -48,7 +48,7 @@ module Saruman
       end
 
       def delete_tag id
-        tag = Saruman::Tag.get id
+        tag = Sharkey::Tag.get id
         return if not tag
 
         tag.taggings.destroy if tag.taggings
@@ -58,7 +58,7 @@ module Saruman
       end
 
       def delete_category id
-        category = Saruman::Category.get id
+        category = Sharkey::Category.get id
         return if not category
 
         # * `category.parent` is a pointer to
@@ -152,7 +152,7 @@ module Saruman
       # Welp, here we go!
       # Send a DELETE request for each link
       if (params[:destroy_links])
-        links = Saruman::Link.by_tag(params[:id])
+        links = Sharkey::Link.by_tag(params[:id])
 
         links.each { |link| delete_link link.id }
       end
@@ -175,7 +175,7 @@ module Saruman
       # Welp, here we go!
       # Send a DELETE request for each link
       if (params[:destroy_links])
-        links = Saruman::Link.by_category(params[:id])
+        links = Sharkey::Link.by_category(params[:id])
 
         links.each { |link| delete_link link.id }
       end
@@ -193,33 +193,33 @@ module Saruman
     # Deleting too much stuff (Caution!)
 
     delete '/all-links' do
-      Saruman::Tagging.destroy
-      Saruman::Link.destroy
+      Sharkey::Tagging.destroy
+      Sharkey::Link.destroy
       redirect to '/'
     end
 
     delete '/all-tags' do
-      Saruman::Tagging.destroy
-      Saruman::Tag.destroy
+      Sharkey::Tagging.destroy
+      Sharkey::Tag.destroy
       redirect to '/'
     end
 
     delete '/all-categories' do
-      Saruman::Categorization.destroy
-      Saruman::CategoryParent.destroy
-      Saruman::CategoryChild.destroy
-      Saruman::Category.destroy
+      Sharkey::Categorization.destroy
+      Sharkey::CategoryParent.destroy
+      Sharkey::CategoryChild.destroy
+      Sharkey::Category.destroy
       redirect to '/'
     end
 
     delete '/everything' do
-      Saruman::Tagging.destroy
-      Saruman::Link.destroy
-      Saruman::Tag.destroy
-      Saruman::Categorization.destroy
-      Saruman::CategoryParent.destroy
-      Saruman::CategoryChild.destroy
-      Saruman::Category.destroy
+      Sharkey::Tagging.destroy
+      Sharkey::Link.destroy
+      Sharkey::Tag.destroy
+      Sharkey::Categorization.destroy
+      Sharkey::CategoryParent.destroy
+      Sharkey::CategoryChild.destroy
+      Sharkey::Category.destroy
       redirect to '/'
     end
 
@@ -227,7 +227,7 @@ module Saruman
     # Individual pages
 
     get '/link/:id' do
-      the_link = Saruman::Link.get(params[:id])
+      the_link = Sharkey::Link.get(params[:id])
       redirect to '/' if not the_link
 
       slim(:link,
@@ -236,7 +236,7 @@ module Saruman
     end
 
     get '/tag/:id' do
-      the_tag = Saruman::Tag.get(params[:id])
+      the_tag = Sharkey::Tag.get(params[:id])
       redirect to '/' if not the_tag
 
       slim(:tag,
@@ -245,7 +245,7 @@ module Saruman
     end
 
     get '/category/:id' do
-      the_category = Saruman::Category.get(params[:id])
+      the_category = Sharkey::Category.get(params[:id])
       redirect to '/' if not the_category
 
       slim(:category,
@@ -257,7 +257,7 @@ module Saruman
     # Creating things
 
     post '/link' do
-      Saruman::Link.create_link(params[:title],
+      Sharkey::Link.create_link(params[:title],
                                 params[:url],
                                 params[:added_at],
                                 params[:tags],
@@ -272,7 +272,7 @@ module Saruman
 
       params[:url].split.each do |url|
 
-        Saruman::Link.create_link(nil,
+        Sharkey::Link.create_link(nil,
                                   url,
                                   nil,
                                   params[:tags] || [],
@@ -283,9 +283,9 @@ module Saruman
     end
 
     post '/category' do
-      new_category = Saruman::Category.first_or_create(name: params[:name]);
+      new_category = Sharkey::Category.first_or_create(name: params[:name]);
 
-      parent_category = Saruman::Category.get(params[:parent])
+      parent_category = Sharkey::Category.get(params[:parent])
       # Silently fail if invalid ID was given
       if (parent_category)
         parent_category.add_child(new_category)
@@ -306,7 +306,7 @@ module Saruman
     get '/links' do
       # Creating an instance variable
       # (visible inside all Views)
-      @links = Saruman::Link.all
+      @links = Sharkey::Link.all
 
       slim(:links,
            :layout => :dashboard,
@@ -316,7 +316,7 @@ module Saruman
     get '/tags' do
       # Creating an instance variable
       # (visible inside all Views)
-      @tags = Saruman::Tag.all.sort
+      @tags = Sharkey::Tag.all.sort
 
       # MagicSuggest, the jQuery plugin, uses this to give
       # suggestions on Tag input fields.
@@ -337,7 +337,7 @@ module Saruman
       # Let's start by showing all Categories
       # WITHOUT parents.
       # Then, recursively show their children
-      @categories = Saruman::Category.orphans
+      @categories = Sharkey::Category.orphans
 
       slim(:categories,
            :layout => :dashboard,
@@ -345,7 +345,7 @@ module Saruman
     end
 
     get '/favorites' do
-      @links = Saruman::Link.all(favorite: true)
+      @links = Sharkey::Link.all(favorite: true)
 
       slim(:links,
            :layout => :dashboard,
@@ -364,17 +364,17 @@ module Saruman
       # BIG EXCEPTION are <select> elements, who fuck up
       # the entire standard
       if (params[:theme])
-        Saruman::Setting['theme'] = params[:theme]
-        Saruman::Setting.save
+        Sharkey::Setting['theme'] = params[:theme]
+        Sharkey::Setting.save
         redirect back
       end
 
       # Error for non-existing setting
-      return 500 unless Saruman::Setting[params[:name]]
+      return 500 unless Sharkey::Setting[params[:name]]
       return 500 unless params[:value]
 
-      Saruman::Setting[params[:name]] = params[:value]
-      Saruman::Setting.save
+      Sharkey::Setting[params[:name]] = params[:value]
+      Sharkey::Setting.save
 
       if request.xhr?
         return 200
@@ -383,7 +383,7 @@ module Saruman
       end
     end
 
-    # Import Saruman::Links from Bookmark HTML files
+    # Import Sharkey::Links from Bookmark HTML files
     # (eg. Firefox, Delicious, etc)
     #
     # POST requests automatically creates a temporary
@@ -402,7 +402,7 @@ module Saruman
     end
 
     get '/tagcloud' do
-      @tags = Saruman::Tag.all
+      @tags = Sharkey::Tag.all
 
       slim(:tagcloud,
            :layout => :dashboard,
@@ -411,7 +411,7 @@ module Saruman
 
     # Surprise me!
     get '/random' do
-      the_link = Saruman::Link.all.sample
+      the_link = Sharkey::Link.all.sample
 
       slim(:link,
            :layout => :dashboard,
@@ -422,7 +422,7 @@ module Saruman
     #
     # Returns the item's favorite state _after_ the change.
     post '/favorite/:id' do
-      the_link = Saruman::Link.get params[:id]
+      the_link = Sharkey::Link.get params[:id]
       return 502 if not the_link
 
       the_link.toggle_favorite
@@ -431,7 +431,7 @@ module Saruman
 
     # Increase the visit count of a link
     post '/visit/:id' do
-      the_link = Saruman::Link.get params[:id]
+      the_link = Sharkey::Link.get params[:id]
       return 502 if not the_link
 
       the_link.visit

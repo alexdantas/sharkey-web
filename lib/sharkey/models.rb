@@ -15,7 +15,7 @@
 require 'data_mapper'
 require 'addressable/uri'
 
-module Saruman
+module Sharkey
 
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   # Initializing DataMapper
@@ -80,19 +80,19 @@ module Saruman
       if (not tags.nil?) and (not tags.empty?)
         tags.each do |tag|
 
-          # If Saruman::Tag exists, return it.
+          # If Sharkey::Tag exists, return it.
           # Otherwise, create it
-          the_tags << Saruman::Tag.first_or_create(name: tag)
+          the_tags << Sharkey::Tag.first_or_create(name: tag)
         end
       end
 
       # Actually populating the database with
       # a new Link
-      Saruman::Link.create(title:    title || "",
+      Sharkey::Link.create(title:    title || "",
                            url:      url,
                            added_at: added_at || DateTime.now,
                            tags:     the_tags,
-                           category: Saruman::Category.get(category),
+                           category: Sharkey::Category.get(category),
                            comment:  comment || "")
       end
 
@@ -100,28 +100,28 @@ module Saruman
     def self.by_tag(tag_id)
 
       # RANT: I don't know why I couldn't simply do something like
-      #       `Saruman::Link.all(:tag => Saruman::Tag.get(tag_id))`
+      #       `Sharkey::Link.all(:tag => Sharkey::Tag.get(tag_id))`
       #       it seems so strange!
       #       DataMapper's docs imply that we actually _can_,
       #       so why...?
 
-      taggings = Saruman::Tagging.all(:tag_id => tag_id)
+      taggings = Sharkey::Tagging.all(:tag_id => tag_id)
 
-      Saruman::Link.all(:taggings => taggings)
+      Sharkey::Link.all(:taggings => taggings)
     end
 
     # Returns all Links that have a Category with `category_id`
     def self.by_category(category_id)
 
       # RANT: I don't know why I couldn't simply do something like
-      #       `Saruman::Link.all(:category => Saruman::Category.get(category_id))`
+      #       `Sharkey::Link.all(:category => Sharkey::Category.get(category_id))`
       #       it seems so strange!
       #       DataMapper's docs imply that we actually _can_,
       #       so why...?
 
-      categorizations = Saruman::Categorization.all(:category_id => category_id)
+      categorizations = Sharkey::Categorization.all(:category_id => category_id)
 
-      Saruman::Link.all(:categorization => categorizations)
+      Sharkey::Link.all(:categorization => categorizations)
     end
 
     def toggle_favorite

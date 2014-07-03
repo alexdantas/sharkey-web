@@ -1,6 +1,6 @@
 require 'yaml'
 
-module Saruman
+module Sharkey
 
   # Global in-app settings.
   #

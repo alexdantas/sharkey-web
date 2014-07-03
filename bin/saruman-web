@@ -1,9 +1,0 @@
-#!/usr/bin/env ruby
-#
-# Main executable for Saruman
-
-require File.expand_path(File.dirname(__FILE__) + '/../lib/saruman')
-require 'vegas'
-
-Vegas::Runner.new(Saruman::App, 'saruman')
-
