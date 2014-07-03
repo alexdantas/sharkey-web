@@ -214,7 +214,10 @@ span.link-internal-link a:hover {
 }
 
 
-
+/* Making the navbars inside wells look pretty */
+.nav {
+	margin-bottom: 2px;
+}
 
 
 
