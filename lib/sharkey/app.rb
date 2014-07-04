@@ -12,6 +12,7 @@ require 'chronic_duration'
 
 # To import Sharkey::Links and get page's Titles
 require 'nokogiri'
+require 'metainspector'
 
 # Create and initialize the databases
 require 'sharkey/models'
@@ -495,6 +496,28 @@ module Sharkey
       slim(:about,
            :layout => :centered,
            locals: { page: "about" })
+    end
+
+    # AJAX requested metadata from an URL
+    # Let's return, beyb
+    get '/metadata' do
+      return 404 if not params[:url]
+
+      begin
+        page = MetaInspector.new(params[:url], :allow_redirections => :all)
+
+        hash = {
+          'pageTitle'       => "#{page.title}",
+          'pageDescription' => "#{page.description}"
+        }
+        return hash.to_json
+
+      rescue
+        # This error-handling sucks, perhaps I should
+        # return error values according to what actually
+        # happened on the server
+        return 503
+      end
     end
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

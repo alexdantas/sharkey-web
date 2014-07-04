@@ -33,6 +33,7 @@ END
   spec.add_dependency 'dm-sqlite-adapter'
   spec.add_dependency 'chronic_duration'
   spec.add_dependency 'nokogiri'
+  spec.add_dependency 'metainspector'
   spec.add_dependency 'vegas'
 
   spec.add_development_dependency 'rdoc'

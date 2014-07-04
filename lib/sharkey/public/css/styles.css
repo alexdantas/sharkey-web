@@ -225,16 +225,17 @@ span.link-internal-link a:hover {
 }
 
 
+span.spinner-placeholder {
+	margin-left: 20px;
+}
 
 
 
 
 
-
-
-
-
-/* do a barrel roll! */
+/*
+ * do a barrel roll!
+ */
 @-webkit-keyframes roll {
 	from { -webkit-transform: rotate(0deg) }
 	to   { -webkit-transform: rotate(360deg) }

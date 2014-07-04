@@ -64,7 +64,7 @@ module Sharkey
     # @param added_at DateTime object or `nil` for DateTime.now
     # @param category An ID of _existing_ category
     #
-    def self.create_link(title, url, tags, category, comment)
+    def self.create_link(title, url, added_at, tags, category, comment)
       # Silently fail
       return if url.nil?
 
