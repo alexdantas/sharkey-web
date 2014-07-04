@@ -40,12 +40,12 @@
             '
             |Settings
 
-        li
+        li class="#{ if page == 'help' then 'active' end }"
           a#keybind-help href="/help"
             span.glyphicon.glyphicon-question-sign
             '
             | Help
-        li
+        li class="#{ if page == 'about' then 'active' end }"
           a#keybind-about href="/about"
             span.glyphicon.glyphicon-info-sign
             '

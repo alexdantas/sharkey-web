@@ -1,0 +1,47 @@
+/ Layout for simple, centered information
+doctype html
+html
+  head
+    meta charset="utf-8"
+    title Sharkey
+
+    / Bootstrap
+      (Poor Man's Theme Support)
+    link[
+      rel="stylesheet" media="screen, projection"
+      href="/themes/#{Sharkey::Setting['theme']}/style.css"
+    ]
+
+    / Misc. Styles
+    - if Sharkey::Setting['loading_bar'] == 'true'
+      link rel="stylesheet" href="/css/nprogress.css"
+
+    / Custom Styles
+    link rel="stylesheet" media="screen, projection" href="/css/styles.css"
+
+    /[if lt IE 9]
+      script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"
+
+    / jQuery
+    script src="/js/lib/jquery-1.9.1.min.js"
+    script src="/js/lib/jquery-ui.js"
+
+    / Bootstrap
+    script src="/js/lib/bootstrap.min.js"
+
+    / Misc. Scripts
+    - if Sharkey::Setting['loading_bar'] == 'true'
+      script src="/js/lib/nprogress.js"
+
+    / Custom Scripts
+    script src="/js/scripts.js"
+
+  body
+    == slim(:navbar,  locals: { page: page })
+
+    .container-fluid
+      .row
+        / The actual content
+        .col-md-8.col-sm-offset-2.main
+          == yield
+

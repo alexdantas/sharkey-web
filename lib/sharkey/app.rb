@@ -485,6 +485,18 @@ module Sharkey
       return "{ \"visitCount\": #{the_link.visit_count} }"
     end
 
+    get '/help' do
+      slim(:help,
+           :layout => :centered,
+           locals: { page: "help" })
+    end
+
+    get '/about' do
+      slim(:about,
+           :layout => :centered,
+           locals: { page: "about" })
+    end
+
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     # Error-handling
 
