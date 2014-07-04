@@ -20,7 +20,8 @@ module Sharkey
       @values = {
         'loading_bar' => 'true',
         'date_format' => 'relative',
-        'theme'       => 'bootstrap'
+        'theme'       => 'bootstrap',
+        'auto_fill'   => 'true'
       }
     end
 

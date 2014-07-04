@@ -4,7 +4,34 @@ p Configure all your stuff here
 
 h2.sub-header#general General Settings
 
-p Aww yeah
+.row.setting
+  .col-md-12
+    h4 Auto-fill Link Info
+.row
+  .col-md-8
+    p.help-block
+      | Automatically try to fill the link's information at the "Add Link" dialog.
+    p.help-block
+      | Tip: it stops when you start typing.
+
+  .col-md-4
+    form role="form" action="/setting" method="POST"
+      .btn-group data-toggle="buttons"
+
+        - if Sharkey::Setting['auto_fill'] == 'true'
+          label.btn.btn-primary.ajax-radio.active
+            input type="radio" name="auto_fill" value="true" checked="true"
+              | On
+          label.btn.btn-default.ajax-radio
+            input type="radio" name="auto_fill" value="false" checked="false"
+              | Off
+        - else
+          label.btn.btn-default.ajax-radio
+            input type="radio" name="auto_fill" value="true" checked="false"
+              | On
+          label.btn.btn-primary.ajax-radio.active
+            input type="radio" name="auto_fill" value="false" checked="true"
+              | Off
 
 h2.sub-header#appearance Appearance
 
