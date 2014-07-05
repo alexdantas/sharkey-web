@@ -133,7 +133,7 @@ h2.sub-header#data Data
   .col-md-4
     form role="form" action="/import" method="POST" enctype="multipart/form-data"
       input type="file" name="file"
-      button.btn.btn-primary type="submit" title="Import"
+      button.btn.btn-primary#button-import type="submit" title="Import"
         span> class="glyphicon glyphicon-import"
         | Import
 
@@ -149,9 +149,10 @@ h2.sub-header#data Data
 
 h2.sub-header#erase-stuff Erase Stuff
 
-p
+p.help-block
   | All these options are highly destructive.
-    There's no way to get your data back once they're gone!
+p.help-block
+  | There's no way to get your data back once it's gone!
 
 .row.setting
   .col-md-12
@@ -206,7 +207,7 @@ p
     h4 Erase Everything
 .row
   .col-md-8
-    p.help-block Deletes everything - Tags, Links, Categories... Watch out!
+    p.help-block Deletes the entire database - Tags, Links, Categories... Watch out!
 
   .col-md-4
     form role="form" action="/everything" method="POST"
