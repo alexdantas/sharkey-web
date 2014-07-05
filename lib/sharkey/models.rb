@@ -21,7 +21,8 @@ module Sharkey
   # Initializing DataMapper
 
   # Full path to the database file
-  DATABASE_PATH = "sqlite3://#{Dir.pwd}/database.db"
+  DATABASE_FILE = "#{Dir.pwd}/database.db"
+  DATABASE_PATH = "sqlite3://#{DATABASE_FILE}"
 
   # By default Strings have at max 50 chars of length
   # That's hideous! Come on!
@@ -217,13 +218,18 @@ module Sharkey
     has n, :childs, self, :through => :categoryChilds, :via => :target
 
     def add_child child
-      throw 'Adding self as child' if child == self
+      return if (child.nil?) or (child == self) or (has_child? child)
+      return if (child.parent) and (child.parent == self)
 
       self.childs << child
       child.parent = self
 
       self.save
       self
+    end
+
+    def has_child? child
+      self.childs.member? child
     end
 
     # Removes the parent/children relationship

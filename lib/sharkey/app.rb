@@ -175,7 +175,7 @@ module Sharkey
 
       # Welp, here we go!
       # Send a DELETE request for each link
-      if (params[:destroy_links])
+      if (params[:destroy_links] == 'true')
         links = Sharkey::Link.by_category(params[:id])
 
         links.each { |link| delete_link link.id }
@@ -214,13 +214,8 @@ module Sharkey
     end
 
     delete '/everything' do
-      Sharkey::Tagging.destroy
-      Sharkey::Link.destroy
-      Sharkey::Tag.destroy
-      Sharkey::Categorization.destroy
-      Sharkey::CategoryParent.destroy
-      Sharkey::CategoryChild.destroy
-      Sharkey::Category.destroy
+      # No need to be cautious
+      FileUtils.rm_f Sharkey::DATABASE_FILE
       redirect to '/'
     end
 
