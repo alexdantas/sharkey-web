@@ -43,7 +43,7 @@ were very complicated to install.
 
 Well, `sharkey` is an attempt to gather the best things from them.
 
-You should probably [check out the live demo][live]. <br />
+You should probably check out the [live demo on saruman.link:5678](http://saruman.link:5678/). <br />
 Be warned, though, that since it's completely public it might have some
 nasty spam or _even worse things_. <br />
 But `sharkey` allows you to easily destroy all data so it shouldn't be
@@ -175,14 +175,13 @@ The whole code is released under the *MIT-license*.
 Check file `LICENSE.md` for details on what you can and
 cannot do with it.
 
-[delicious]: https://delicious.com/
-[hoard]: http://www.urbandictionary.com/define.php?term=Tab-Hoarder
-[gem]:   http://link
-[live]:  http://saruman.link/sharkey/
-[sinatra]: http://
-[ruby]:
-[vegas]:
-[bootstrap]:
-[bootswatch]:
-[jquery]:
+[delicious]:  https://delicious.com/
+[hoard]:      http://www.urbandictionary.com/define.php?term=Tab-Hoarder
+[gem]:        http://link
+[sinatra]:    http://
+[ruby]:       https://www.ruby-lang.org/
+[vegas]:      http://code.quirkey.com/vegas/
+[bootstrap]:  http://getbootstrap.com/
+[bootswatch]: http://bootswatch.com/
+[jquery]:     http://jquery.com/
 
