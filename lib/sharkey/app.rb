@@ -114,6 +114,17 @@ module Sharkey
 
         datetime.strftime '%Y-%m-%d %H:%m'
       end
+
+      # Returns an array with all the themes names
+      def get_themes
+        themes_dir = File.join(File.dirname(__FILE__), '/public/themes')
+
+        themes = []
+        Dir.entries(themes_dir).sort.each do |dir|
+          themes.push dir if ((dir != 'fonts') and (dir[0] != '.'))
+        end
+        themes
+      end
     end
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

@@ -50,12 +50,11 @@ h2.sub-header#appearance Appearance
     form#theme-form role="form" action="/setting" method="POST"
       .form-group
         select.form-control#theme-select name="theme" placeholder="Theme"
-          - Dir.entries(File.expand_path('./lib/sharkey/public/themes')).sort.each do |dir|
-            - if (dir != 'fonts') and (dir[0] != '.')
-              - if dir == Sharkey::Setting['theme']
-                option value="#{dir}" selected="true" = dir
-              - else
-                option value="#{dir}" = dir
+          - get_themes.each do |theme|
+            - if theme == Sharkey::Setting['theme']
+              option value="#{theme}" selected="true" = theme
+            - else
+              option value="#{theme}" = theme
 
         button.btn.btn-primary type="submit" title="Apply"
           span> class="glyphicon glyphicon-picture"
