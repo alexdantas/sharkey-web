@@ -178,7 +178,7 @@ cannot do with it.
 [delicious]:  https://delicious.com/
 [hoard]:      http://www.urbandictionary.com/define.php?term=Tab-Hoarder
 [gem]:        http://link
-[sinatra]:    http://
+[sinatra]:    http://www.sinatrarb.com/
 [ruby]:       https://www.ruby-lang.org/
 [vegas]:      http://code.quirkey.com/vegas/
 [bootstrap]:  http://getbootstrap.com/

@@ -35,6 +35,7 @@ END
   spec.add_dependency 'nokogiri'
   spec.add_dependency 'metainspector'
   spec.add_dependency 'vegas'
+  spec.add_dependency 'redcarpet'
 
   spec.add_development_dependency 'rdoc'
   spec.add_development_dependency 'bundler', '~> 1.3'
